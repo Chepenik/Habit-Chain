@@ -10,6 +10,4 @@ const addMiddlewares = async app => {
   await addEnvironmentMiddlewares(app);
 };
 
-
-
 export default addMiddlewares;
