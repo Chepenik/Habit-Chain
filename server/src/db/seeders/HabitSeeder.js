@@ -2,6 +2,8 @@ import { Habit } from '../../models/index.js';
 
 class HabitSeeder {
   static async seed() {
+   
+   
     const habitsData = [
       {
         name: "Running",
