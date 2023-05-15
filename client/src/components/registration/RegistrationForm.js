@@ -1,6 +1,8 @@
 import React, { useState } from "react";
+import ErrorList from "../layout/ErrorList";
 import FormError from "../layout/FormError";
 import config from "../../config";
+import translateServerErrors from "../../services/translateServerErrors";
 
 const RegistrationForm = () => {
   const [userPayload, setUserPayload] = useState({
@@ -8,32 +10,39 @@ const RegistrationForm = () => {
     email: "",
     password: "",
     passwordConfirmation: "",
-  });  
+  });
 
   const [errors, setErrors] = useState({});
+  const [serverErrors, setServerErrors] = useState({});
 
   const [shouldRedirect, setShouldRedirect] = useState(false);
 
-  const validateInput = async (payload) => {
-    setErrors({});
-    const { username, email, password, passwordConfirmation } = payload;
-    const emailRegexp = config.validation.email.regexp;
+  const validateInput = () => {
+    const { username, email, password, passwordConfirmation } = userPayload;
+    const emailRegexp = config.validation.email.regexp.emailRegex;
     let newErrors = {};
-  
+
+    if (username.trim() === "") {
+      newErrors = {
+        ...newErrors,
+        username: "is required",
+      };
+    }
+
     if (!email.match(emailRegexp)) {
       newErrors = {
         ...newErrors,
         email: "is invalid",
       };
     }
-  
+
     if (password.trim() === "") {
       newErrors = {
         ...newErrors,
         password: "is required",
       };
     }
-  
+
     if (passwordConfirmation.trim() === "") {
       newErrors = {
         ...newErrors,
@@ -47,41 +56,7 @@ const RegistrationForm = () => {
         };
       }
     }
-  
-    if (username.trim() === "") {
-      newErrors = {
-        ...newErrors,
-        username: "is required",
-      };
-    } else {
-      try {
-        const response = await fetch(`/api/v1/check-username/${username}`);
-        if (!response.ok) {
-          if (response.status === 409) {
-            const data = await response.json();
-            newErrors = {
-              ...newErrors,
-              username: data.message,
-            };
-          } else {
-            const errorMessage = `${response.status} (${response.statusText})`;
-            const error = new Error(errorMessage);
-            throw error;
-          }
-        } else {
-          const data = await response.json();
-          if (!data.available) {
-            newErrors = {
-              ...newErrors,
-              username: "is already taken",
-            };
-          }
-        }
-      } catch (error) {
-        console.error(`Error in fetch: ${error.message}`);
-      }
-    }
-  
+
     setErrors(newErrors);
     if (Object.keys(newErrors).length === 0) {
       return true;
@@ -91,29 +66,28 @@ const RegistrationForm = () => {
 
   const onSubmit = async (event) => {
     event.preventDefault();
-    if (await validateInput(userPayload)) {
+    if (validateInput()) {
       try {
-        if (Object.keys(errors).length === 0) {
-          const response = await fetch("/api/v1/users", {
-            method: "post",
-            body: JSON.stringify(userPayload),
-            headers: new Headers({
-              "Content-Type": "application/json",
-            }),
-          });
-          if (!response.ok) {
-            if (response.status === 409) {
-              const data = await response.json();
-              setErrors({ username: data.message });
-            } else {
-              const errorMessage = `${response.status} (${response.statusText})`;
-              const error = new Error(errorMessage);
-              throw error;
-            }
+        const response = await fetch("/api/v1/users", {
+          method: "post",
+          body: JSON.stringify(userPayload),
+          headers: new Headers({
+            "Content-Type": "application/json",
+          }),
+        });
+        if (!response.ok) {
+          if (response.status === 422) {
+            const errorBody = await response.json();
+            const newServerErrors = translateServerErrors(errorBody.errors);
+            setServerErrors(newServerErrors);
           } else {
-            const userData = await response.json();
-            setShouldRedirect(true);
+            const errorMessage = `${response.status} (${response.statusText})`;
+            const error = new Error(errorMessage);
+            throw error;
           }
+        } else {
+          const userData = await response.json();
+          setShouldRedirect(true);
         }
       } catch (err) {
         console.error(`Error in fetch: ${err.message}`);
@@ -135,6 +109,7 @@ const RegistrationForm = () => {
   return (
     <div className="grid-container">
       <h1>Register</h1>
+      <ErrorList errors={serverErrors} />
       <form onSubmit={onSubmit}>
         <div>
           <label>
@@ -151,7 +126,12 @@ const RegistrationForm = () => {
         <div>
           <label>
             Email
-            <input type="text" name="email" value={userPayload.email} onChange={onInputChange} />
+            <input
+              type="text"
+              name="email"
+              value={userPayload.email}
+              onChange={onInputChange}
+            />
             <FormError error={errors.email} />
           </label>
         </div>

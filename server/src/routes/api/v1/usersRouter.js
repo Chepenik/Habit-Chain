@@ -12,11 +12,6 @@ usersRouter.post("/", async (req, res) => {
   const { username, email, password, passwordConfirmation } = formInput;
 
   try {
-    const existingUser = await User.query().findOne({ username });
-    if (existingUser) {
-      return res.status(409).json({ message: "Username already exists" });
-    }
-
     const persistedUser = await User.query().insertAndFetch({ username, email, password });
     return req.login(persistedUser, () => {
       return res.status(201).json({ user: persistedUser });
