@@ -12,3 +12,28 @@
   -moz-tab-size: 4;
   tab-size: 4;
 }
+
+.HabitIndex {
+  text-align: center;
+  margin: 0 auto;
+  font-family: 'Crimson Pro', serif;
+  color: #000000;
+  font-size: 2em;
+}
+
+.habit-tile {
+  text-align: left;
+  font-size: .7em;
+  background-color: #eeff00;
+  padding: 20px;
+  margin: 20px 99px;
+}
+
+.habit-link {
+  color: #000000;
+  text-decoration: none;
+}
+
+.habit-name {
+  font-weight: bold;
+}
