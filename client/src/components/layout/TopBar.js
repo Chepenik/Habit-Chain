@@ -15,6 +15,12 @@ const TopBar = ({ user }) => {
   ];
 
   const authenticatedListItems = [
+    <li key="profile">
+      <Link to="/profile">Your Profile</Link>
+    </li>,
+    <li key="add-habit">
+      <Link to="/add-habit">Add A Habit</Link>
+    </li>,
     <li key="sign-out">
       <SignOutButton />
     </li>,
@@ -24,7 +30,7 @@ const TopBar = ({ user }) => {
     <div className="top-bar">
       <div className="top-bar-left">
         <ul className="menu">
-          <li className="menu-text">App</li>
+          <li className="menu-text">Habit-Chain</li>
           <li>
             <Link to="/">Home</Link>
           </li>
