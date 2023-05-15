@@ -4,35 +4,36 @@ import config from "../../config";
 
 const RegistrationForm = () => {
   const [userPayload, setUserPayload] = useState({
+    username: "",
     email: "",
     password: "",
     passwordConfirmation: "",
-  });
+  });  
 
   const [errors, setErrors] = useState({});
 
   const [shouldRedirect, setShouldRedirect] = useState(false);
 
-  const validateInput = (payload) => {
+  const validateInput = async (payload) => {
     setErrors({});
-    const { email, password, passwordConfirmation } = payload;
+    const { username, email, password, passwordConfirmation } = payload;
     const emailRegexp = config.validation.email.regexp;
     let newErrors = {};
-
+  
     if (!email.match(emailRegexp)) {
       newErrors = {
         ...newErrors,
         email: "is invalid",
       };
     }
-
-    if (password.trim() == "") {
+  
+    if (password.trim() === "") {
       newErrors = {
         ...newErrors,
         password: "is required",
       };
     }
-
+  
     if (passwordConfirmation.trim() === "") {
       newErrors = {
         ...newErrors,
@@ -46,17 +47,51 @@ const RegistrationForm = () => {
         };
       }
     }
-
+  
+    if (username.trim() === "") {
+      newErrors = {
+        ...newErrors,
+        username: "is required",
+      };
+    } else {
+      try {
+        const response = await fetch(`/api/v1/check-username/${username}`);
+        if (!response.ok) {
+          if (response.status === 409) {
+            const data = await response.json();
+            newErrors = {
+              ...newErrors,
+              username: data.message,
+            };
+          } else {
+            const errorMessage = `${response.status} (${response.statusText})`;
+            const error = new Error(errorMessage);
+            throw error;
+          }
+        } else {
+          const data = await response.json();
+          if (!data.available) {
+            newErrors = {
+              ...newErrors,
+              username: "is already taken",
+            };
+          }
+        }
+      } catch (error) {
+        console.error(`Error in fetch: ${error.message}`);
+      }
+    }
+  
     setErrors(newErrors);
     if (Object.keys(newErrors).length === 0) {
-      return true
+      return true;
     }
-    return false
+    return false;
   };
 
   const onSubmit = async (event) => {
     event.preventDefault();
-    if (validateInput(userPayload)) {
+    if (await validateInput(userPayload)) {
       try {
         if (Object.keys(errors).length === 0) {
           const response = await fetch("/api/v1/users", {
@@ -67,12 +102,18 @@ const RegistrationForm = () => {
             }),
           });
           if (!response.ok) {
-            const errorMessage = `${response.status} (${response.statusText})`;
-            const error = new Error(errorMessage);
-            throw error;
+            if (response.status === 409) {
+              const data = await response.json();
+              setErrors({ username: data.message });
+            } else {
+              const errorMessage = `${response.status} (${response.statusText})`;
+              const error = new Error(errorMessage);
+              throw error;
+            }
+          } else {
+            const userData = await response.json();
+            setShouldRedirect(true);
           }
-          const userData = await response.json();
-          setShouldRedirect(true);
         }
       } catch (err) {
         console.error(`Error in fetch: ${err.message}`);
@@ -95,6 +136,18 @@ const RegistrationForm = () => {
     <div className="grid-container">
       <h1>Register</h1>
       <form onSubmit={onSubmit}>
+        <div>
+          <label>
+            Username
+            <input
+              type="text"
+              name="username"
+              value={userPayload.username}
+              onChange={onInputChange}
+            />
+            <FormError error={errors.username} />
+          </label>
+        </div>
         <div>
           <label>
             Email
