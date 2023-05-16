@@ -12,4 +12,15 @@ habitsRouter.get("/", async (req, res) => {
   }
 });
 
+habitsRouter.post("/", async (req, res) => {
+  try {
+    const { name, reduceFriction, why } = req.body;
+    const userId = parseInt(req.user.id, 10); 
+    const habit = await Habit.query().insert({ name, reduceFriction, why, userId });
+    return res.status(201).json({ habit });
+  } catch (error) {
+    return res.status(500).json({ errors: error });
+  }
+});
+
 export default habitsRouter;

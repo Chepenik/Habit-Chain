@@ -9,7 +9,7 @@ import SignInForm from "./authentication/SignInForm";
 import TopBar from "./layout/TopBar";
 import AuthenticatedRoute from "./authentication/AuthenticatedRoute";
 import HabitList from "./HabitList";
-import HabitForm from "./HabitForm"; // Add this import statement
+import HabitForm from "./HabitForm";
 
 const App = (props) => {
   const [currentUser, setCurrentUser] = useState(undefined);

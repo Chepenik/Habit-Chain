@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { Redirect } from "react-router-dom";
 
 const HabitForm = () => {
   const [habitData, setHabitData] = useState({
@@ -7,6 +8,8 @@ const HabitForm = () => {
     why: "",
   });
 
+  const [redirect, setRedirect] = useState(false);
+
   const handleChange = (event) => {
     setHabitData({
       ...habitData,
@@ -14,17 +17,38 @@ const HabitForm = () => {
     });
   };
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
-    // Add your code here to handle form submission
+    try {
+      const response = await fetch("/api/v1/habits", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(habitData),
+      });
+      if (response.ok) {
+        setRedirect(true);
+      } else {
+        console.error("Failed to create habit");
+      }
+    } catch (error) {
+      console.error("Error:", error);
+    }
   };
+
+  if (redirect) {
+    return <Redirect to="/" />;
+  }
 
   return (
     <div className="habit-form">
       <h2>Add a New Habit</h2>
       <form onSubmit={handleSubmit}>
         <div className="form-group">
-          <label htmlFor="name">What's The Name Of The Habit You Want To Start A Steak For?</label>
+          <label htmlFor="name">
+            What's The Name Of The Habit You Want To Start A Steak For?
+          </label>
           <input
             type="text"
             id="name"
@@ -34,7 +58,10 @@ const HabitForm = () => {
           />
         </div>
         <div className="form-group">
-          <label htmlFor="reduceFriction">What Is One Thing You Will Do To Reduce Friction So You Can Complete This Habit Daily?</label>
+          <label htmlFor="reduceFriction">
+            What steps will you take to minimize any friction or difficulties
+            associated with completing the habit, ensuring its daily completion?
+          </label>
           <input
             type="text"
             id="reduceFriction"
@@ -44,7 +71,10 @@ const HabitForm = () => {
           />
         </div>
         <div className="form-group">
-          <label htmlFor="why">Why Do You Want To Start A Streak For This Habit?</label>
+          <label htmlFor="why">
+            Why do you have the desire to initiate a streak for this particular
+            habit?
+          </label>
           <input
             type="text"
             id="why"
