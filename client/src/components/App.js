@@ -10,6 +10,7 @@ import TopBar from "./layout/TopBar";
 import AuthenticatedRoute from "./authentication/AuthenticatedRoute";
 import HabitList from "./HabitList";
 import HabitForm from "./HabitForm";
+import HabitShow from "./HabitShow";
 
 const App = (props) => {
   const [currentUser, setCurrentUser] = useState(undefined);
@@ -36,7 +37,12 @@ const App = (props) => {
         <Route exact path="/users/new" component={RegistrationForm} />
         <Route exact path="/user-sessions/new" component={SignInForm} />
         <AuthenticatedRoute exact path="/profile" component={UserProfile} user={currentUser} />
-        <Route exact path="/add-habit" component={HabitForm} /> {/* Add this route */}
+        <Route exact path="/add-habit" component={HabitForm} />
+        <Route
+          exact
+          path="/habits/:id"
+          render={({ match }) => <HabitShow habitId={match.params.id} />}
+        />
       </Switch>
     </Router>
   );

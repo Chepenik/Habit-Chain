@@ -16,4 +16,3 @@ const HabitTile = (props) => {
 };
 
 export default HabitTile;
-
