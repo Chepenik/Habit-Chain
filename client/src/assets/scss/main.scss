@@ -73,7 +73,7 @@
   display: block;
   width: 100%;
   padding: 10px;
-  background-color: #f5a623;
+  background-color: #2F58CD;
   color: #fff;
   font-size: 16px;
   font-weight: bold;
@@ -85,7 +85,8 @@
 }
 
 .submit-button:hover {
-  background-color: #e69100;
+  background-color: #B4E4FF;
+  color: #000000;
 }
 
 .top-bar {
@@ -110,4 +111,33 @@
 
 .habit-show {
   text-align: center;
+}
+
+.error {
+  color: #e83535;
+}
+
+.form-group {
+  text-align: center;
+}
+
+.search-button {
+  display: block;
+  width: 100%;
+  padding: 10px;
+  background-color: #2F58CD;
+  color: #fff;
+  font-size: 16px;
+  font-weight: bold;
+  text-align: center;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  margin: 10px 10px 10px 0px;
+}
+
+.search-button:hover {
+  background-color: #B4E4FF;
+  color: #000000;
 }
