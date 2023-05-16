@@ -24,7 +24,7 @@
 .habit-tile {
   text-align: left;
   font-size: .7em;
-  background-color: #eeff00;
+  background-color: #FFF89C;
   padding: 20px;
   margin: 20px 99px;
 }
@@ -86,4 +86,24 @@
 
 .submit-button:hover {
   background-color: #e69100;
+}
+
+.top-bar {
+  background-color: #B4E4FF;
+  color: #000000;
+}
+
+.top-bar ul {
+  background-color: #B4E4FF;
+  color: #000000;
+}
+
+.top-bar a {
+  color: #000000;
+}
+
+.menu button {
+  background-color: #2F58CD;
+  color: #000000;
+  border-radius: 100%;
 }
