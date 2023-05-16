@@ -12,6 +12,16 @@ habitsRouter.get("/", async (req, res) => {
   }
 });
 
+habitsRouter.get("/:id", async (req, res) => {
+  const { id } = req.params;
+  try {
+    const habit = await Habit.query().findById(id);
+    return res.status(200).json({ habit });
+  } catch (error) {
+    return res.status(500).json({ errors: error });
+  }
+});
+
 habitsRouter.post("/", async (req, res) => {
   try {
     const { name, reduceFriction, why } = req.body;
