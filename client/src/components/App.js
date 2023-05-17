@@ -11,9 +11,11 @@ import AuthenticatedRoute from "./authentication/AuthenticatedRoute";
 import HabitList from "./HabitList";
 import HabitForm from "./HabitForm";
 import HabitShow from "./HabitShow";
+import GiphySearch from "./GiphySearch"; // Import the GiphySearch component
 
 const App = (props) => {
   const [currentUser, setCurrentUser] = useState(undefined);
+
   const fetchCurrentUser = async () => {
     try {
       const user = await getCurrentUser();
@@ -37,7 +39,9 @@ const App = (props) => {
         <Route exact path="/users/new" component={RegistrationForm} />
         <Route exact path="/user-sessions/new" component={SignInForm} />
         <AuthenticatedRoute exact path="/profile" component={UserProfile} user={currentUser} />
-        <Route exact path="/add-habit" component={HabitForm} />
+        <Route exact path="/add-habit">
+          <HabitForm />
+        </Route>
         <Route
           exact
           path="/habits/:id"
