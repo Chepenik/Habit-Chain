@@ -141,3 +141,23 @@
   background-color: #B4E4FF;
   color: #000000;
 }
+
+.giphy-tile {
+  height: 350px;
+  width: 100%;
+  margin-bottom: 20px; 
+}
+
+.giphy-tile img {
+  height: 100%;
+  width: 100%;
+  object-fit: cover; 
+}
+
+.giphy-tile.selected {
+  border: 10px solid blue; /* Replace blue with your desired color */
+}
+
+label {
+  text-align: left;
+}

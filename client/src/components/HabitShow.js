@@ -28,6 +28,7 @@ const HabitShow = (props) => {
 
   return (
     <div className="habit-show">
+      <img src={habit.giphy} alt="GIF" />
       <h1>{habit.name}</h1>
       <p>Reduce Friction: {habit.reduceFriction}</p>
       <p>Why: {habit.why}</p>

@@ -1,24 +1,24 @@
-// make a get request
-//instead of adding a body pass along the search query as a query string
-//make the query param a key value pair so it has a name and my backend can find the specific query param
-
 import React, { useState } from "react";
 
-const GiphySearch = ({ query, onSelect, onSearch }) => {
-  const [searchTerm, setSearchTerm] = useState(query || "");
+const GiphySearch = ({ habitData, onSelect, onSearch, setGiphyResults }) => {
+  const [searchTerm, setSearchTerm] = useState("");
   const [searchResults, setSearchResults] = useState([]);
 
   const handleSelect = (giphy) => {
-    onSelect(giphy);
-    setSearchTerm("");
-    setSearchResults([]);
+    setHabitData({
+      ...habitData,
+      giphy,
+    });
   };
 
   const handleSearch = async () => {
+    const url = `/api/v1/giphy?searchTerm=${searchTerm}`;
+
     try {
-      const response = await fetch(`/api/v1/giphy?searchTerm=${searchTerm}`);
+      const response = await fetch(url);
       const data = await response.json();
-      setSearchResults(data.giphyResults);
+      console.log(data);
+      setGiphyResults(data.giphyResults);
     } catch (error) {
       console.error("Error searching GIFs:", error);
     }
@@ -26,6 +26,7 @@ const GiphySearch = ({ query, onSelect, onSearch }) => {
 
   return (
     <div className="giphy-search">
+      <label htmlFor="selectGif">Select a GIF to represent your habit:</label>
       <input
         type="text"
         value={searchTerm}
@@ -42,7 +43,7 @@ const GiphySearch = ({ query, onSelect, onSearch }) => {
             className="search-result"
             onClick={() => handleSelect(giphy)}
           >
-            <img src={giphy.images.url} alt={giphy.title} />
+            <img src={giphy.images.original.url} alt="GIF" />
           </div>
         ))}
       </div>

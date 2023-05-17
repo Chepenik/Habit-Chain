@@ -24,9 +24,9 @@ habitsRouter.get("/:id", async (req, res) => {
 
 habitsRouter.post("/", async (req, res) => {
   try {
-    const { name, reduceFriction, why } = req.body;
+    const { name, reduceFriction, why, giphy } = req.body;
     const userId = parseInt(req.user.id, 10); 
-    const habit = await Habit.query().insert({ name, reduceFriction, why, userId });
+    const habit = await Habit.query().insert({ name, reduceFriction, why, giphy, userId });
     return res.status(201).json({ habit });
   } catch (error) {
     return res.status(500).json({ errors: error });

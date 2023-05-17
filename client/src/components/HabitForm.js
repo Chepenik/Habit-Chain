@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Redirect } from "react-router-dom";
 import GiphySearch from "./GiphySearch";
+import GiphyTile from "./GiphyTile";
 
 const HabitForm = () => {
   const [habitData, setHabitData] = useState({
@@ -12,7 +13,8 @@ const HabitForm = () => {
 
   const [redirect, setRedirect] = useState(false);
   const [formErrors, setFormErrors] = useState({});
-  const [searchTerm, setSearchTerm] = useState("");
+  const [giphyResults, setGiphyResults] = useState([]);
+  const [selectedGiphy, setSelectedGiphy] = useState(null);
 
   const handleChange = (event) => {
     setHabitData({
@@ -22,36 +24,18 @@ const HabitForm = () => {
   };
 
   const handleGiphySelect = (giphy) => {
+    setSelectedGiphy(giphy.images.original.url);
     setHabitData({
       ...habitData,
       giphy: giphy.images.original.url,
     });
-  };
-
-  const handleGiphySearch = async () => {
-    try {
-      console.log("Calling handleGiphySearch");
-      const response = await fetch(`/api/v1/giphy?searchTerm=${searchTerm}`);
-      if (response.ok) {
-        const data = await response.json();
-        if (data.giphyResults.length > 0) {
-          setHabitData({
-            ...habitData,
-            giphy: data.giphyResults[0].images.original.url,
-          });
-        } else {
-          console.error("No GIFs found.");
-        }
-      } else {
-        console.error("Failed to search GIFs");
-      }      
-    } catch (error) {
-      console.error("Error:", error);
-    }
+    console.log("Selected Giphy:", giphy.images.original.url);
   };
 
   const handleSubmit = async (event) => {
     event.preventDefault();
+
+    console.log("habitData:", habitData);
 
     const errors = {};
     if (!habitData.name) {
@@ -88,86 +72,82 @@ const HabitForm = () => {
   };
 
   useEffect(() => {
-    console.log("useEffect triggered");
-    handleGiphySearch();
-  }, [searchTerm]);
+    // Add any necessary logic for search term handling or API requests
+  }, []); // Only run once on component mount
 
   if (redirect) {
     return <Redirect to="/" />;
   }
 
-  return (
+    return (
     <div className="habit-form">
-      <h2>Add a New Habit</h2>
-      <div className="form-group">
-        <label htmlFor="giphy">Pick a Gif to represent your habit:</label>
+        <h2>Add a New Habit</h2>
         <div className="giphy-search-container">
-          <GiphySearch
-            query={habitData.giphy}
+        <GiphySearch
+            habitData={habitData}
             onSelect={handleGiphySelect}
-            onSearch={setSearchTerm}
-          />
-          {habitData.giphy && (
-            <div className="selected-giphy-container">
-              <img src={habitData.giphy} alt="Selected Giphy" />
-            </div>
-          )}
+            setGiphyResults={setGiphyResults}
+            selectedGiphy={selectedGiphy}
+        />
+        {giphyResults.slice(0, 10).map((giphy) => (
+            <GiphyTile
+            key={giphy.id}
+            giphy={giphy}
+            isSelected={giphy.images.original.url === selectedGiphy}
+            onSelect={handleGiphySelect}
+            />
+        ))}
         </div>
-      </div>
-
-      {/* //pass in some tiles to display the gifs */}
-      <form onSubmit={handleSubmit}>
+        <form onSubmit={handleSubmit}>
         <div className="form-group">
-          <label htmlFor="name">
+            <label htmlFor="name">
             What's the name of the habit you want to start a streak for?
-          </label>
-          <input
+            </label>
+            <input
             type="text"
             id="name"
             name="name"
             value={habitData.name}
             onChange={handleChange}
-          />
-          {formErrors.name && <p className="error">{formErrors.name}</p>}
+            />
+            {formErrors.name && <p className="error">{formErrors.name}</p>}
         </div>
         <div className="form-group">
-          <label htmlFor="reduceFriction">
-            What steps will you take to minimize any friction or difficulties
-            associated with completing the habit, ensuring its daily completion?
-          </label>
-          <input
+            <label htmlFor="reduceFriction">
+            What steps will you take to minimize any friction or difficulties associated with completing the habit, ensuring its daily completion?
+            </label>
+            <input
             type="text"
             id="reduceFriction"
             name="reduceFriction"
             value={habitData.reduceFriction}
             onChange={handleChange}
-          />
-          {formErrors.reduceFriction && (
+            />
+            {formErrors.reduceFriction && (
             <p className="error">{formErrors.reduceFriction}</p>
-          )}
+            )}
         </div>
         <div className="form-group">
-          <label htmlFor="why">
-            Why do you have the desire to initiate a streak for this particular
-            habit?
-          </label>
-          <input
+            <label htmlFor="why">
+            Why do you have the desire to initiate a streak for this particular habit?
+            </label>
+            <input
             type="text"
             id="why"
             name="why"
             value={habitData.why}
             onChange={handleChange}
-          />
-          {formErrors.why && <p className="error">{formErrors.why}</p>}
+            />
+            {formErrors.why && <p className="error">{formErrors.why}</p>}
         </div>
         <div className="form-group">
-          <button type="submit" className="submit-button">
+            <button type="submit" className="submit-button">
             Add Habit
-          </button>
+            </button>
         </div>
-      </form>
+        </form>
     </div>
-  );  
+    );
 };
 
 export default HabitForm;

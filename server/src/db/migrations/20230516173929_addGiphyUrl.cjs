@@ -6,16 +6,16 @@
  * @param {Knex} knex
  */
 exports.up = async (knex) => {
-    knex.schema.alterTable("habits", (table) => {
-        table.string("giphyUrl").notNullable();
-    })
+    await knex.schema.alterTable("habits", (table) => {
+        table.string("giphy").notNullable();
+    });
 }
 
 /**
  * @param {Knex} knex
  */
-exports.down = (knex) => {
-    knex.schema.alterTable("habits", (table) => {
-        table.dropColumn("giphyUrl");
-    })
+exports.down = async (knex) => {
+    await knex.schema.alterTable("habits", (table) => {
+        table.dropColumn("giphy");
+    });
 }
