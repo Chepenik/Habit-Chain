@@ -159,8 +159,8 @@ const RegistrationForm = () => {
             <FormError error={errors.passwordConfirmation} />
           </label>
         </div>
-        <div>
-          <input type="submit" className="button" value="Register" />
+        <div className="glow-on-hover">
+          <input type="submit" value="Register" className="glow-on-hover-input" />
         </div>
       </form>
     </div>

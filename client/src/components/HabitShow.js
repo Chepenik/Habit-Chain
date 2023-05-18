@@ -1,8 +1,11 @@
 import React, { useState, useEffect } from "react";
+// import HabitChain from "./HabitChain";
 
 const HabitShow = (props) => {
   const { habitId } = props;
   const [habit, setHabit] = useState(null);
+  // const [habitChain, setHabitChain] = useState([]); // State for habit chain
+
 
   const fetchHabit = async () => {
     try {
@@ -20,10 +23,12 @@ const HabitShow = (props) => {
 
   useEffect(() => {
     fetchHabit();
-  }, [habitId]);
+  }, []);
 
   const handleButtonClick = () => {
     // Will need to add my button click logic here
+        // Add the clicked habit to the habit chain
+        // setHabitChain((prevChain) => [...prevChain, habitId]);
     console.log("Button clicked!");
   };
 
@@ -40,8 +45,9 @@ const HabitShow = (props) => {
         <p><b>Why I want to make this a habit:</b> {habit.why}</p>
       </div>
       <div className="streakButton">
-        <button onClick={handleButtonClick}>Ahhhhhh I'm being clicked</button>
+        <button className="glow-on-hover signup-link" onClick={handleButtonClick}>Click To Add To Your Streak</button>
       </div>
+      {/* <HabitChain chain={habitChain} /> Render the HabitChain component */}
     </div>
   );
 };

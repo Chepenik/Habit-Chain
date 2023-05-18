@@ -99,8 +99,8 @@ const SignInForm = () => {
             <FormError error={errors.password} />
           </label>
         </div>
-        <div>
-          <input type="submit" className="button" value="Sign In" />
+        <div className="glow-on-hover">
+          <input type="submit" className="glow-on-hover-input" value="Sign In" />
         </div>
       </form>
     </div>
