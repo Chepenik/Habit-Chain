@@ -10,10 +10,10 @@ const HabitTile = (props) => {
         <div className="grid-x">
           <div className="cell small-12 medium-8">
             <p className="habit-name">{habit.name}</p>
+            <p>Streak: *Will need to add streak count here*</p>
           </div>
           <div className="cell small-12 medium-4">
-            <p>Reduce Friction: {habit.reduceFriction}</p>
-            <p>Why: {habit.why}</p>
+            <img src={habit.giphy} alt="GIF" />
           </div>
         </div>
       </Link>

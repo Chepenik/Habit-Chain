@@ -114,6 +114,12 @@
   text-align: center;
 }
 
+.habit-show img {
+  height: 100%;
+  width: 250px;
+  object-fit: cover;
+}
+
 .error {
   color: #e83535;
 }
@@ -167,4 +173,49 @@ label {
   width: 400px;
   height: 100%;
   object-fit: cover;
+}
+
+.habit-show-container {
+  padding-bottom: 250px; /* Adjust this value as needed */
+}
+
+.streakButton {
+  position: fixed;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 150px;
+  padding: 10px;
+  background-color: #2F58CD;
+  font-size: 25px;
+  font-weight: bold;
+  text-align: center;
+  border: none;
+  border-radius: 50%;
+  transition: background-color 0.3s;
+  margin: 10px 10px 10px 0px;
+  z-index: 9999; 
+}
+
+.streakButton button {
+  color: #fff;
+}
+
+.streakButton button:hover {
+  background-color: #1c3e9c;
+  color: #fff;
+  position: fixed;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 150px;
+  padding: 10px;
+  font-size: 25px;
+  font-weight: bold;
+  text-align: center;
+  border: none;
+  border-radius: 50%;
+  transition: background-color 0.3s;
+  margin: 10px 10px 10px 0px;
+  z-index: 9999; 
 }
