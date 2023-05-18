@@ -22,16 +22,26 @@ const HabitShow = (props) => {
     fetchHabit();
   }, [habitId]);
 
+  const handleButtonClick = () => {
+    // Will need to add my button click logic here
+    console.log("Button clicked!");
+  };
+
   if (!habit) {
     return <p>Loading habit...</p>;
   }
 
   return (
-    <div className="habit-show">
-      <img src={habit.giphy} alt="GIF" />
-      <h1>{habit.name}</h1>
-      <p>Reduce Friction: {habit.reduceFriction}</p>
-      <p>Why: {habit.why}</p>
+    <div className="habit-show-container">
+      <div className="habit-show">
+        <img src={habit.giphy} alt="GIF" />
+        <h1>{habit.name}</h1>
+        <p><b>How to reduce the friction involved with completing this habit:</b> {habit.reduceFriction}</p>
+        <p><b>Why I want to make this a habit:</b> {habit.why}</p>
+      </div>
+      <div className="streakButton">
+        <button onClick={handleButtonClick}>Ahhhhhh I'm being clicked</button>
+      </div>
     </div>
   );
 };
