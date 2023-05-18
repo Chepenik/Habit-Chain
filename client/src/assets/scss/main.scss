@@ -27,6 +27,7 @@
   background-color: #FFF89C;
   padding: 20px;
   margin: 20px 99px;
+  border-radius: 5%;
 }
 
 .habit-link {
@@ -160,4 +161,10 @@
 
 label {
   text-align: left;
+}
+
+.HabitChainImage {
+  width: 400px;
+  height: 100%;
+  object-fit: cover;
 }
