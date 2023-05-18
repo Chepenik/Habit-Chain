@@ -27,6 +27,9 @@ habitsRouter.post("/", async (req, res) => {
     const { name, reduceFriction, why, giphy } = req.body;
     const userId = parseInt(req.user.id, 10); 
     const habit = await Habit.query().insert({ name, reduceFriction, why, giphy, userId });
+
+    habit.giphyUrl = `/api/v1/habits/${habit.id}/giphy`;
+    
     return res.status(201).json({ habit });
   } catch (error) {
     return res.status(500).json({ errors: error });

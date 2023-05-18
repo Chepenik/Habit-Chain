@@ -1,11 +1,10 @@
 import React, { useState, useEffect } from "react";
-// import HabitChain from "./HabitChain";
+import HabitChain from "./HabitChain";
 
 const HabitShow = (props) => {
   const { habitId } = props;
   const [habit, setHabit] = useState(null);
-  // const [habitChain, setHabitChain] = useState([]); // State for habit chain
-
+  const [habitChain, setHabitChain] = useState([]);
 
   const fetchHabit = async () => {
     try {
@@ -25,12 +24,35 @@ const HabitShow = (props) => {
     fetchHabit();
   }, []);
 
-  const handleButtonClick = () => {
-    // Will need to add my button click logic here
-        // Add the clicked habit to the habit chain
-        // setHabitChain((prevChain) => [...prevChain, habitId]);
-    console.log("Button clicked!");
+  const handleButtonClick = async () => {
+    try {
+      // Make a POST request to update the streak count
+
+      console.log("Making a POST request to update the streak count");
+      console.log("habitId:", habitId);
+
+      const response = await fetch("/api/v1/streaks", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ habitId: parseInt(habitId, 10) }), // Parse habitId as integer
+      });
+      if (response.ok) {
+        const data = await response.json();
+        // Update the habit chain with the new streak
+        setHabitChain((prevChain) => [...prevChain, data.streak.id]);
+
+        console.log("Streak count updated successfully");
+        console.log("New streak:", data.streak);
+      } else {
+        console.error("Failed to update streak count:", response.statusText);
+      }
+    } catch (error) {
+      console.error("Error updating streak count:", error);
+    }
   };
+
 
   if (!habit) {
     return <p>Loading habit...</p>;
@@ -41,13 +63,20 @@ const HabitShow = (props) => {
       <div className="habit-show">
         <img src={habit.giphy} alt="GIF" />
         <h1>{habit.name}</h1>
-        <p><b>How to reduce the friction involved with completing this habit:</b> {habit.reduceFriction}</p>
-        <p><b>Why I want to make this a habit:</b> {habit.why}</p>
+        <p>
+          <b>How to reduce the friction involved with completing this habit:</b>{" "}
+          {habit.reduceFriction}
+        </p>
+        <p>
+          <b>Why I want to make this a habit:</b> {habit.why}
+        </p>
       </div>
       <div className="streakButton">
-        <button className="glow-on-hover signup-link" onClick={handleButtonClick}>Click To Add To Your Streak</button>
+        <button className="glow-on-hover signup-link" onClick={handleButtonClick}>
+          Click To Add To Your Streak
+        </button>
       </div>
-      {/* <HabitChain chain={habitChain} /> Render the HabitChain component */}
+      <HabitChain chain={habitChain} />
     </div>
   );
 };
