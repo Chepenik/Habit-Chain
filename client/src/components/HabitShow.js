@@ -27,10 +27,6 @@ const HabitShow = (props) => {
   const handleButtonClick = async () => {
     try {
       // Make a POST request to update the streak count
-
-      console.log("Making a POST request to update the streak count");
-      console.log("habitId:", habitId);
-
       const response = await fetch("/api/v1/streaks", {
         method: "POST",
         headers: {
@@ -41,8 +37,7 @@ const HabitShow = (props) => {
       if (response.ok) {
         const data = await response.json();
         // Update the habit chain with the new streak
-        setHabitChain((prevChain) => [...prevChain, data.streak.id]);
-
+        setHabitChain((prevChain) => [...prevChain, { habitId, giphy: habit.giphy }]);
         console.log("Streak count updated successfully");
         console.log("New streak:", data.streak);
       } else {
@@ -52,7 +47,6 @@ const HabitShow = (props) => {
       console.error("Error updating streak count:", error);
     }
   };
-
 
   if (!habit) {
     return <p>Loading habit...</p>;
@@ -64,8 +58,7 @@ const HabitShow = (props) => {
         <img src={habit.giphy} alt="GIF" />
         <h1>{habit.name}</h1>
         <p>
-          <b>How to reduce the friction involved with completing this habit:</b>{" "}
-          {habit.reduceFriction}
+          <b>How to reduce the friction involved with completing this habit:</b> {habit.reduceFriction}
         </p>
         <p>
           <b>Why I want to make this a habit:</b> {habit.why}

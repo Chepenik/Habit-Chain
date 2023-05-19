@@ -1,5 +1,6 @@
 import express from "express";
 import { Habit } from "../../../models/index.js";
+import giphyRouter from "./giphyRouter.js";
 
 const habitsRouter = new express.Router();
 
@@ -35,5 +36,7 @@ habitsRouter.post("/", async (req, res) => {
     return res.status(500).json({ errors: error });
   }
 });
+
+habitsRouter.use("/:habitId/giphy", giphyRouter);
 
 export default habitsRouter;

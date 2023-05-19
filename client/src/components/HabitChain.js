@@ -6,10 +6,10 @@ const HabitChain = (props) => {
   return (
     <div className="habit-chain">
       <h2>Habit Chain:</h2>
-      {chain.map((habitId, index) => (
+      {chain.map((item, index) => (
         <div key={index} className="habit-chain-item">
           {/* Render habit chain item based on the habitId */}
-          <img src={`/api/v1/habits/${habitId}/giphy`} alt="GIF" />
+          <img src={item.giphy} alt="GIF" />
         </div>
       ))}
     </div>
