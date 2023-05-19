@@ -1,26 +1,22 @@
 import React from "react";
-// import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 const HabitChain = (props) => {
   const { chain, giphyImage } = props;
-    const renderChainImages = () => {
-        const images = [];
 
-        for (let i = 0; i < chain; i++) {
-            images.push(<img key={i} src={giphyImage} alt="GIF" />);
-        }
+  const renderChainImages = () => {
+    const images = [];
 
-        return images;
+    for (let i = 0; i < chain; i++) {
+      images.push(<img key={i} src={giphyImage} alt="GIF" />);
     }
-
-    // create as many giphy imgs as the streak count    
-        // for loop
+    return images;
+  };
 
   return (
     <div className="habit-chain">
       <h2>Habit Chain:</h2>
       <div className="habit-chain-item">
-      {renderChainImages()}
+        {renderChainImages()}
       </div>
     </div>
   );
