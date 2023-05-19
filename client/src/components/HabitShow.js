@@ -4,7 +4,7 @@ import HabitChain from "./HabitChain";
 const HabitShow = (props) => {
   const { habitId } = props;
   const [habit, setHabit] = useState(null);
-  const [habitChain, setHabitChain] = useState([]);
+  const [habitChain, setHabitChain] = useState(0);
 
   const fetchHabit = async () => {
     try {
@@ -12,6 +12,9 @@ const HabitShow = (props) => {
       if (response.ok) {
         const data = await response.json();
         setHabit(data.habit);
+        if (data.existingStreak) {
+          setHabitChain(data.existingStreak.streakCount);
+        }
       } else {
         console.error("Failed to fetch habit:", response.statusText);
       }
@@ -26,18 +29,24 @@ const HabitShow = (props) => {
 
   const handleButtonClick = async () => {
     try {
+      // Fetch the current streak count
+      // const streakResponse = await fetch(`/api/v1/streaks/${habitId}`);
+      // const streakData = await streakResponse.json();
+      // const currentStreakCount = parseInt(streakData.streak.streakCount, 10);
+  
       // Make a POST request to update the streak count
       const response = await fetch("/api/v1/streaks", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ habitId: parseInt(habitId, 10) }), // Parse habitId as integer
+        body: JSON.stringify({ habitId: parseInt(habitId, 10)}),
       });
       if (response.ok) {
         const data = await response.json();
         // Update the habit chain with the new streak
-        setHabitChain((prevChain) => [...prevChain, { habitId, giphy: habit.giphy }]);
+        // setHabitChain((prevChain) => [...prevChain, { habitId, giphy: habit.giphy, streakCount: currentStreakCount + 1 }]);
+        setHabitChain(data.streakCount);
         console.log("Streak count updated successfully");
         console.log("New streak:", data.streak);
       } else {
@@ -47,7 +56,7 @@ const HabitShow = (props) => {
       console.error("Error updating streak count:", error);
     }
   };
-
+  
   if (!habit) {
     return <p>Loading habit...</p>;
   }
@@ -69,7 +78,7 @@ const HabitShow = (props) => {
           Click To Add To Your Streak
         </button>
       </div>
-      <HabitChain chain={habitChain} />
+      <HabitChain chain={habitChain} giphyImage={habit.giphy} />
     </div>
   );
 };

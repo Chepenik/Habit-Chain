@@ -93,11 +93,17 @@
 .top-bar {
   background-color: #B4E4FF;
   color: #000000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.2em;
 }
 
 .top-bar ul {
   background-color: #B4E4FF;
   color: #000000;
+  display: flex;
+  align-items: center;
 }
 
 .top-bar a {
@@ -108,6 +114,18 @@
 
 .top-bar a.signup-link {
   color: #ffffff;
+}
+
+.top-bar img {
+  height: 100px;
+  width: 100px;
+  margin-right: 10px; /* Adjust the margin value as needed */
+}
+
+@media (max-width: 768px) {
+  .top-bar {
+    font-size: .8em;
+  }
 }
 
 .glow-on-hover {
@@ -260,11 +278,25 @@ label {
   text-align: left;
 }
 
-.HabitChainImage {
-  width: 400px;
-  height: 100%;
+.habit-chain {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.habit-chain-item {
+  margin: 10px; 
+  width: 100px;
+  height: 100px;
   object-fit: cover;
 }
+
+// .habit-chain .chain-icon {
+//   width: 20px;
+//   height: auto;
+//   margin: 5px; /* Adjust the margin value as needed */
+// }
 
 .habit-show-container {
   padding-bottom: 250px; 

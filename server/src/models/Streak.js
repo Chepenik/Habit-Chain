@@ -1,6 +1,6 @@
 const Model = require('./Model');
 const Habit = require('./Habit');
-const User = require('./User'); // Add User model import
+const User = require('./User'); 
 
 class Streak extends Model {
   static get tableName() {

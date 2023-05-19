@@ -30,7 +30,7 @@ const TopBar = ({ user }) => {
     <div className="top-bar">
       <div className="top-bar-left">
         <ul className="menu">
-          <li className="menu-text">Habit-Chain</li>
+          <img src="https://nostr.build/p/nb8895.jpeg" alt="Logo" />
           <li>
             <Link to="/">Home</Link>
           </li>
