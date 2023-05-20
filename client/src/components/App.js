@@ -11,7 +11,6 @@ import AuthenticatedRoute from "./authentication/AuthenticatedRoute";
 import HabitList from "./HabitList";
 import HabitForm from "./HabitForm";
 import HabitShow from "./HabitShow";
-import GiphySearch from "./GiphySearch"; // Import the GiphySearch component
 
 const App = (props) => {
   const [currentUser, setCurrentUser] = useState(undefined);

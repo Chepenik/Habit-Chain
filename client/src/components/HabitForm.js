@@ -47,6 +47,9 @@ const HabitForm = () => {
     if (!habitData.why) {
       errors.why = "Please enter the reason for starting the habit";
     }
+    if (!habitData.giphy) {
+      errors.giphy = "Please select a GIF";
+    }
 
     if (Object.keys(errors).length > 0) {
       setFormErrors(errors);
@@ -97,6 +100,7 @@ const HabitForm = () => {
             onSelect={handleGiphySelect}
             />
         ))}
+        {formErrors.giphy && <p className="error">{formErrors.giphy}</p>}
         </div>
         <form onSubmit={handleSubmit}>
         <div className="form-group">
