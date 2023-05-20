@@ -29,12 +29,6 @@ const HabitShow = (props) => {
 
   const handleButtonClick = async () => {
     try {
-      // Fetch the current streak count
-      // const streakResponse = await fetch(`/api/v1/streaks/${habitId}`);
-      // const streakData = await streakResponse.json();
-      // const currentStreakCount = parseInt(streakData.streak.streakCount, 10);
-  
-      // Make a POST request to update the streak count
       const response = await fetch("/api/v1/streaks", {
         method: "POST",
         headers: {
@@ -44,8 +38,6 @@ const HabitShow = (props) => {
       });
       if (response.ok) {
         const data = await response.json();
-        // Update the habit chain with the new streak
-        // setHabitChain((prevChain) => [...prevChain, { habitId, giphy: habit.giphy, streakCount: currentStreakCount + 1 }]);
         setHabitChain(data.streakCount);
         console.log("Streak count updated successfully");
         console.log("New streak:", data.streak);
