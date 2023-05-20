@@ -8,7 +8,7 @@ class Seeder {
   static async seed() {
     await UserSeeder.seed();
     await HabitSeeder.seed();
-    // await StreakSeeder.seed();
+    await StreakSeeder.seed();
 
     console.log("Done!");
     await connection.destroy();

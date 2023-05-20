@@ -285,22 +285,12 @@ label {
   flex-wrap: wrap;
 }
 
-.habit-chain-item {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: flex-start;
-  align-items: flex-start;
-  margin: 5px;
-  width: calc(12.5% - 10px);
-  height: 100px;
-  object-fit: cover;
-}
-
 .habit-chain img {
   flex: 0 0 calc(12.5% - 10px);
   height: 100%;
   object-fit: cover;
   margin: 5px;
+  height: 100px;
 }
 
 .habit-chain .chain-icon {
