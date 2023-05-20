@@ -64,6 +64,10 @@ const HabitShow = (props) => {
         <p>
           <b>Why I want to make this a habit:</b> {habit.why}
         </p>
+        <div className="streak-count">
+        <p>
+          <b>Streak Count:</b> {habitChain}</p>
+      </div>
       </div>
       <div className="streakButton">
         <button className="glow-on-hover signup-link" onClick={handleButtonClick}>

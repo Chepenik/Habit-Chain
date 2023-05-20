@@ -18,24 +18,9 @@ streaksRouter.post("/", async (req, res) => {
     try {
       const { habitId } = req.body;
       const userId = parseInt(req.user.id, 10);
-  
-      console.log("Received request to create a new streak");
-    //   console.log("habitId:", habitId);
-    //   console.log("userId:", userId);
-  
-      // Validate the streakCount value
-    //   const streakCount = parseInt(req.body.streakCount, 10);
-    //   if (isNaN(streakCount)) {
-    //     throw new Error("Invalid streakCount value");
-    //   }
-  
-    //   console.log("streakCount:", streakCount);
-  
-      // Find the previous streak for the user and habit combination
       const previousStreak = await Streak.query()
         .findOne({ userId: userId, habitId: habitId, active: true })
 
-  
       let updatedStreak;
       if (previousStreak) {
         console.log("streak already exists")
