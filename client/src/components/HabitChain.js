@@ -1,4 +1,5 @@
 import React from "react";
+import { BsLink } from "react-icons/bs";
 
 const HabitChain = (props) => {
   const { chain, giphyImage } = props;
@@ -7,7 +8,12 @@ const HabitChain = (props) => {
     const images = [];
 
     for (let i = 0; i < chain; i++) {
-      images.push(<img key={i} src={giphyImage} alt="GIF" />);
+      images.push(
+        <React.Fragment key={i}>
+          <img src={giphyImage} alt="GIF" />
+          <BsLink />
+        </React.Fragment>
+      );
     }
     return images;
   };
