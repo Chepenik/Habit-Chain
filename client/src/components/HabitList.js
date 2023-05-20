@@ -3,6 +3,7 @@ import HabitTile from "./HabitTile";
 
 const HabitList = () => {
   const [habits, setHabits] = useState([]);
+  const [streakCounts, setStreakCounts] = useState({});
 
   const fetchHabits = async () => {
     try {
@@ -18,13 +19,48 @@ const HabitList = () => {
     }
   };
 
+  const fetchStreakCount = async (habitId) => {
+    try {
+      const response = await fetch(`/api/v1/streaks/${habitId}`);
+      if (response.ok) {
+        const data = await response.json();
+        return data.streak.streakCount;
+      } else {
+        console.error("Failed to fetch streak:", response.statusText);
+        return 0; // Default streak count if fetch fails
+      }
+    } catch (error) {
+      console.error("Error fetching streak:", error);
+      return 0; // Default streak count if fetch fails
+    }
+  };
+
+  const fetchStreakCounts = async () => {
+    const counts = {};
+    for (const habit of habits) {
+      const streakCount = await fetchStreakCount(habit.id);
+      counts[habit.id] = streakCount;
+    }
+    setStreakCounts(counts);
+  };
+
   useEffect(() => {
     fetchHabits();
   }, []);
 
-  const habitItems = habits.map((habit) => {
-    return <HabitTile key={habit.id} habit={habit} />;
-  });
+  useEffect(() => {
+    if (habits.length > 0) {
+      fetchStreakCounts();
+    }
+  }, [habits]);
+
+  const habitItems = habits.map((habit) => (
+    <HabitTile
+      key={habit.id}
+      habit={habit}
+      streakCount={streakCounts[habit.id] || 0}
+    />
+  ));
 
   return (
     <div className="HabitIndex">
