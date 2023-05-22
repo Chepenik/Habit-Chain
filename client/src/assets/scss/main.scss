@@ -24,11 +24,32 @@
 .habit-tile {
   text-align: left;
   font-size: .7em;
-  background-color: #FFF89C;
+  background-color: #98EECC;
+  padding: 20px;
+  margin: 20px 99px;
+  border-radius: 5%;
+  max-width: 700px;
+}
+
+.habit-tile:hover {
+  text-align: left;
+  font-size: .7em;
+  background-color: #7503f7;
   padding: 20px;
   margin: 20px 99px;
   border-radius: 5%;
 }
+
+.habit-tile:hover p {
+  color: white;
+}
+
+.habit-list {
+  display: flex;
+  flex-direction: column;
+  align-items: center; 
+}
+
 
 .habit-link {
   color: #000000;
