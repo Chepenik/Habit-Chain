@@ -28,9 +28,9 @@ habitsRouter.get("/:id", async (req, res) => {
 
 habitsRouter.post("/", async (req, res) => {
   try {
-    const { name, reduceFriction, why, giphy } = req.body;
+    const { name, reduceFriction, why, giphy, streakType } = req.body;
     const userId = parseInt(req.user.id, 10); 
-    const habit = await Habit.query().insert({ name, reduceFriction, why, giphy, userId });
+    const habit = await Habit.query().insert({ name, reduceFriction, why, giphy, streakType, userId });
 
     habit.giphyUrl = `/api/v1/habits/${habit.id}/giphy`;
     

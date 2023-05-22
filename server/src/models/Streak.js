@@ -10,13 +10,13 @@ class Streak extends Model {
   static get jsonSchema() {
     return {
       type: 'object',
-      required: ['active', 'streakCount', 'habitId', 'userId'], // Add userId to the required properties
+      required: ['active', 'streakCount', 'habitId', 'userId'], 
       properties: {
         id: { type: 'integer' },
         active: { type: 'boolean' },
         streakCount: { type: 'integer' },
         habitId: { type: 'integer' },
-        userId: { type: 'integer' }, // Add userId property
+        userId: { type: 'integer' }, 
         createdAt: { type: 'string' },
         updatedAt: { type: 'string' },
       },

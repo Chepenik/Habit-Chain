@@ -9,12 +9,13 @@ class Habit extends Model {
   static get jsonSchema() {
     return {
       type: "object",
-      required: ["name", "reduceFriction", "why", "userId"],
+      required: ["name", "reduceFriction", "why", "streakType", "userId"],
       properties: {
         id: { type: "integer" },
         name: { type: "string" },
         reduceFriction: { type: "string" },
         why: { type: "string" },
+        streakType: { type: "string" },
         userId: { type: "integer" },
         createdAt: { type: "string" },
         updatedAt: { type: "string" },
