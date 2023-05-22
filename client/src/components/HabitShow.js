@@ -64,9 +64,13 @@ const HabitShow = (props) => {
         <p>
           <b>Why I want to make this a habit:</b> {habit.why}
         </p>
+        <p>
+          <b>Streak Type:</b> {habit.streakType}
+        </p> 
         <div className="streak-count">
         <p>
-          <b>Streak Count:</b> {habitChain}</p>
+          <b>Streak Count:</b> {habitChain}
+        </p>
       </div>
       </div>
       <div className="streakButton">

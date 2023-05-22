@@ -27,11 +27,11 @@ const HabitList = () => {
         return data.streak.streakCount;
       } else {
         console.error("Failed to fetch streak:", response.statusText);
-        return 0; // Default streak count if fetch fails
+        return 0; 
       }
     } catch (error) {
       console.error("Error fetching streak:", error);
-      return 0; // Default streak count if fetch fails
+      return 0; 
     }
   };
 
@@ -58,6 +58,7 @@ const HabitList = () => {
     <HabitTile
       key={habit.id}
       habit={habit}
+      streakType={habit.streakType}
       streakCount={streakCounts[habit.id] || 0}
     />
   ));
