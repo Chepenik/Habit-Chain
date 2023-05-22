@@ -26,7 +26,7 @@ const GiphySearch = ({ habitData, onSelect, onSearch, setGiphyResults }) => {
 
   return (
     <div className="giphy-search">
-      <label htmlFor="selectGif">Select a GIF to represent your habit:</label>
+      <label htmlFor="selectGif">What GIF represents your habit?:</label>
       <input
         type="text"
         value={searchTerm}

@@ -11,7 +11,7 @@ const HabitChain = (props) => {
       images.push(
         <React.Fragment key={i}>
           <img src={giphyImage} alt="GIF" />
-          <BsLink />
+          {i < chain - 1 && <BsLink />}
         </React.Fragment>
       );
     }
