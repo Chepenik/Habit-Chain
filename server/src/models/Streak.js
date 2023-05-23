@@ -43,6 +43,17 @@ class Streak extends Model {
       },
     };
   }
+
+  // isActive() {
+  //   // Get the current date.
+  //   const today = new Date();
+  //   // Get the habit's start date.
+  //   const startDate = this.startDate;
+  //   // Calculate the number of days between the current date and the habit's start date.
+  //   const daysSinceStart = dateFns.differenceInDays(today, startDate);
+  //   // Check if the number of days since the habit's start date is less than or equal to the habit's streak length.
+  //   return daysSinceStart <= this.streakLength;
+  // }
 }
 
 module.exports = Streak;
