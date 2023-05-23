@@ -5,6 +5,7 @@ const HabitShow = (props) => {
   const { habitId } = props;
   const [habit, setHabit] = useState(null);
   const [habitChain, setHabitChain] = useState(0);
+  const [streakActive, setStreakActive] = useState(null); // New state for streak status
 
   const fetchHabit = async () => {
     try {
@@ -23,8 +24,23 @@ const HabitShow = (props) => {
     }
   };
 
+  const fetchStreakStatus = async () => {
+    try {
+      const response = await fetch(`/api/v1/streaks/${habitId}/status`); // Fetch streak status
+      if (response.ok) {
+        const data = await response.json();
+        setStreakActive(data.active);
+      } else {
+        console.error("Failed to fetch streak status:", response.statusText);
+      }
+    } catch (error) {
+      console.error("Error fetching streak status:", error);
+    }
+  };
+
   useEffect(() => {
     fetchHabit();
+    fetchStreakStatus(); // Fetch streak status on component mount
   }, []);
 
   const handleButtonClick = async () => {
@@ -34,7 +50,7 @@ const HabitShow = (props) => {
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ habitId: parseInt(habitId, 10)}),
+        body: JSON.stringify({ habitId: parseInt(habitId, 10) }),
       });
       if (response.ok) {
         const data = await response.json();
@@ -48,7 +64,7 @@ const HabitShow = (props) => {
       console.error("Error updating streak count:", error);
     }
   };
-  
+
   if (!habit) {
     return <p>Loading habit...</p>;
   }
@@ -59,19 +75,24 @@ const HabitShow = (props) => {
         <img src={habit.giphy} alt="GIF" />
         <h1>{habit.name}</h1>
         <p>
-          <b>How to reduce the friction involved with completing this habit:</b> {habit.reduceFriction}
+          <b>How to reduce the friction involved with completing this habit:</b>{" "}
+          {habit.reduceFriction}
         </p>
         <p>
           <b>Why I want to make this a habit:</b> {habit.why}
         </p>
         <p>
           <b>Streak Type:</b> {habit.streakType}
-        </p> 
-        <div className="streak-count">
-        <p>
-          <b>Streak Count:</b> {habitChain}
         </p>
-      </div>
+        <p>
+          <b>Status:</b>{" "}
+          {streakActive === null ? "Loading..." : streakActive ? "Active" : "Inactive"}
+        </p>
+        <div className="streak-count">
+          <p>
+            <b>Streak Count:</b> {habitChain}
+          </p>
+        </div>
       </div>
       <div className="streakButton">
         <button className="glow-on-hover signup-link" onClick={handleButtonClick}>

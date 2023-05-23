@@ -1,6 +1,7 @@
 const Model = require('./Model');
 const Habit = require('./Habit');
 const User = require('./User'); 
+const date = require('date-fns');
 
 class Streak extends Model {
   static get tableName() {
@@ -44,16 +45,26 @@ class Streak extends Model {
     };
   }
 
-  // isActive() {
-  //   // Get the current date.
-  //   const today = new Date();
-  //   // Get the habit's start date.
-  //   const startDate = this.startDate;
-  //   // Calculate the number of days between the current date and the habit's start date.
-  //   const daysSinceStart = dateFns.differenceInDays(today, startDate);
-  //   // Check if the number of days since the habit's start date is less than or equal to the habit's streak length.
-  //   return daysSinceStart <= this.streakLength;
-  // }
+  isActive() {
+    const today = new Date();
+    const startDate = new Date(this.startDate);
+  
+    if (this.streakType === 'week') {
+      const endDate = dateFns.addDays(startDate, 7);
+      return dateFns.isWithinInterval(today, { start: startDate, end: endDate });
+    }
+  
+    if (this.streakType === 'month') {
+      const endDate = dateFns.addMonths(startDate, 1);
+      return dateFns.isWithinInterval(today, { start: startDate, end: endDate });
+    }
+  
+    if (this.streakType === 'day') {
+      return dateFns.isSameDay(today, startDate);
+    }
+  
+    return false; 
+  }
 }
 
 module.exports = Streak;
