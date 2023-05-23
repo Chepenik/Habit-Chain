@@ -86,7 +86,7 @@ const HabitShow = (props) => {
         </p>
         <p>
           <b>Status:</b>{" "}
-          {streakActive === null ? "Loading..." : streakActive ? "Active" : "Inactive"}
+          {streakActive === null ? "Loading..." : streakActive ? "active" : "inactive"}
         </p>
         <div className="streak-count">
           <p>

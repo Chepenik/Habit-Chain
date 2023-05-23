@@ -1,5 +1,6 @@
 import { Streak } from '../../models/index.js';
 
+
 class StreakSeeder {
   static async seed() {
     const streaksData = [
@@ -7,7 +8,9 @@ class StreakSeeder {
         active: true,
         streakCount: 5,
         habitId: 1,
-        userId: 1, // Hardcoded userId value
+        userId: 1, // Provide the appropriate user ID
+        startDate: new Date().toISOString(),
+        longestStreak: 0,
         createdAt: new Date().toISOString(),
         updatedAt: new Date().toISOString(),
       },
@@ -15,7 +18,9 @@ class StreakSeeder {
         active: false,
         streakCount: 2,
         habitId: 2,
-        userId: 1, // Hardcoded userId value
+        userId: 1, // Provide the appropriate user ID
+        startDate: new Date().toISOString(),
+        longestStreak: 0,
         createdAt: new Date().toISOString(),
         updatedAt: new Date().toISOString(),
       },
@@ -23,7 +28,9 @@ class StreakSeeder {
         active: true,
         streakCount: 10,
         habitId: 3,
-        userId: 1, // Hardcoded userId value
+        userId: 1, // Provide the appropriate user ID
+        startDate: new Date().toISOString(),
+        longestStreak: 0,
         createdAt: new Date().toISOString(),
         updatedAt: new Date().toISOString(),
       },

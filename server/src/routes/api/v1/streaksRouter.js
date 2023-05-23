@@ -58,7 +58,8 @@ streaksRouter.post("/", async (req, res) => {
         streakCount: 1,
         habitId: habitId,
         userId: userId,
-        startDate: new Date(),
+        startDate: new Date().toISOString(),
+        longestStreak: 0,
       });
     }
 
