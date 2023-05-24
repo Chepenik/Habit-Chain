@@ -31,21 +31,22 @@ habitsRouter.post("/", async (req, res) => {
   try {
     const { name, reduceFriction, why, giphy, streakType } = req.body;
     const userId = parseInt(req.user.id, 10); 
-    const habit = await Habit.query().insert({ name, reduceFriction, why, giphy, streakType, userId });
-
-    // const streak = await Streak.query().insert({
-    //   active: false,
-    //   streakCount: 0,
-    //   habitId: habit.id,
-    //   userId: userId,
-    //   startDate: new Date().toISOString(),
-    //   longestStreak: 0,
-    // });
+    const habit = await Habit.query().insertAndFetch({ name, reduceFriction, why, giphy, streakType, userId });
+console.log(habit)
+    const streak = await Streak.query().insertAndFetch({
+      active: false,
+      streakCount: 0,
+      habitId: parseInt(habit.id),
+      userId: userId,
+      startDate: new Date().toISOString(),
+      longestStreak: 0,
+    });
 
     habit.giphyUrl = `/api/v1/habits/${habit.id}/giphy`;
 
     return res.status(201).json({ habit, redirect: true });
   } catch (error) {
+    console.log(error);
     return res.status(500).json({ errors: error });
   }
 });

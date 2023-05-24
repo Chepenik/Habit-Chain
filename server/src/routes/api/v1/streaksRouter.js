@@ -43,7 +43,7 @@ streaksRouter.post("/", async (req, res) => {
     const previousStreak = await Streak.query().findOne({ userId, habitId });
 
     let updatedStreak;
-    if (previousStreak) {
+
       updatedStreak = await Streak.query()
         .patchAndFetchById(previousStreak.id, { active: true, streakCount: parseInt(previousStreak.streakCount) + 1 });
 
@@ -51,17 +51,7 @@ streaksRouter.post("/", async (req, res) => {
         updatedStreak = await Streak.query()
           .patchAndFetchById(previousStreak.id, { longestStreak:  parseInt(updatedStreak.streakCount) });
       }
-    } else {
-      console.log("Streak does not exist, creating new");
-      updatedStreak = await Streak.query().insert({
-        active: true,
-        streakCount: 1,
-        habitId,
-        userId,
-        startDate: new Date().toISOString(),
-        longestStreak: 1,
-      });
-    }
+
     console.log("New streak created:", updatedStreak);
     return res.status(201).json({ streakCount: updatedStreak.streakCount });
   } catch (error) {
@@ -70,8 +60,10 @@ streaksRouter.post("/", async (req, res) => {
   }
 });
 
+
 // need to check if I have never added a habitchain
 // if I successfully done two consecutive days
-// if I try to add a habit-chain but I missed a day
+// if I try to add a habit-chain but I missed a day (this is where will use my isActive() to tell wether or not I've missed a day)
+
 
 export default streaksRouter;
