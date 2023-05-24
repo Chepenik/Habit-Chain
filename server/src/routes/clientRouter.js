@@ -5,7 +5,7 @@ const router = new express.Router();
 
 const clientRoutes = ["/", "/habits/:id", "/user-sessions/new", "/users/new"];
 
-const authedClientRoutes = ["/profile", "/add-habit"];
+const authedClientRoutes = ["/profile", "/add-habit", "/habits"];
 
 router.get(clientRoutes, (req, res) => {
   res.sendFile(getClientIndexPath());
@@ -20,3 +20,4 @@ router.get(authedClientRoutes, (req, res) => {
 });
 
 export default router;
+

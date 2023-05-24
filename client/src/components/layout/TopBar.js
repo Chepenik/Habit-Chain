@@ -26,14 +26,14 @@ const TopBar = ({ user }) => {
     </li>,
   ];
 
+  const homeLink = user ? <Link to="/habits">Home</Link> : <Link to="/">Home</Link>;
+
   return (
     <div className="top-bar">
       <div className="top-bar-left">
         <ul className="menu">
           <img src="https://nostr.build/p/nb8895.jpeg" alt="Logo" />
-          <li>
-            <Link to="/">Home</Link>
-          </li>
+          {homeLink}
         </ul>
       </div>
       <div className="top-bar-right">

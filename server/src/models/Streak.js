@@ -58,8 +58,10 @@ class Streak extends Model {
     const startDate = new Date(this.startDate);
     let endDate;
   
-    if (this.streakType === 'week') {
-      endDate = dateFns.addDays(startDate, 7);
+    if (this.streakType === 'day') {
+      endDate = dateFns.addDays(startDate, 1);
+    } else if (this.streakType === 'week') {
+      endDate = dateFns.addWeeks(startDate, 1);
     } else if (this.streakType === 'month') {
       endDate = dateFns.addMonths(startDate, 1);
     } else {
@@ -67,8 +69,7 @@ class Streak extends Model {
     }
   
     return dateFns.isWithinInterval(today, { start: startDate, end: endDate });
-  }
-  
+  }  
 }
 
 module.exports = Streak;
