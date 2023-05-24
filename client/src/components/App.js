@@ -11,6 +11,7 @@ import AuthenticatedRoute from "./authentication/AuthenticatedRoute";
 import HabitList from "./HabitList";
 import HabitForm from "./HabitForm";
 import HabitShow from "./HabitShow";
+import Welcome from "./Welcome";
 
 const App = (props) => {
   const [currentUser, setCurrentUser] = useState(undefined);
@@ -33,6 +34,9 @@ const App = (props) => {
       <TopBar user={currentUser} />
       <Switch>
         <Route exact path="/">
+          <Welcome />
+        </Route>
+        <Route exact path="/habits">
           <HabitList />
         </Route>
         <Route exact path="/users/new" component={RegistrationForm} />
