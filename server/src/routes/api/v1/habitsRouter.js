@@ -15,13 +15,13 @@ habitsRouter.get("/", async (req, res) => {
 
 habitsRouter.get("/:id", async (req, res) => {
   const { id } = req.params;
-  const userId = req.user.id
+  const userId = req.user.id;
   try {
     const habit = await Habit.query().findById(id);
-    const existingStreak = await Streak.query().findOne({ userId: userId, habitId: id, active: true })
+    const existingStreak = await Streak.query().findOne({ userId: userId, habitId: id });
     return res.status(200).json({ habit, existingStreak });
   } catch (error) {
-    console.log(error)
+    console.log(error);
     return res.status(500).json({ errors: error });
   }
 });

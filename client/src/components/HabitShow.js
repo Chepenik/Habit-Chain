@@ -5,7 +5,7 @@ const HabitShow = (props) => {
   const { habitId } = props;
   const [habit, setHabit] = useState(null);
   const [habitChain, setHabitChain] = useState(0);
-  const [streakActive, setStreakActive] = useState(null); // New state for streak status
+  const [streakActive, setStreakActive] = useState(null); 
 
   const fetchHabit = async () => {
     try {

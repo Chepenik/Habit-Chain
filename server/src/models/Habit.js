@@ -15,7 +15,7 @@ class Habit extends Model {
         name: { type: "string" },
         reduceFriction: { type: "string" },
         why: { type: "string" },
-        streakType: { type: "string" },
+        streakType: { type: "string", enum: ['daily', 'weekly', 'monthly'] }, 
         userId: { type: "integer" },
         createdAt: { type: "string" },
         updatedAt: { type: "string" },

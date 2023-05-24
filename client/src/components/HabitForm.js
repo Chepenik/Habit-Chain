@@ -79,8 +79,7 @@ const HabitForm = () => {
   };
 
   useEffect(() => {
-    // Add any necessary logic for search term handling or API requests
-  }, []); // Only run once on component mount
+  }, []); 
 
   if (redirect) {
     return <Redirect to="/" />;

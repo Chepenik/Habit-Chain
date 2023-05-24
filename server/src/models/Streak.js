@@ -47,33 +47,44 @@ class Streak extends Model {
     };
   }
 
+  async $beforeUpdate(opt, queryContext) {
+    await super.$beforeUpdate(opt, queryContext);
+    const habit = await this.$relatedQuery('habit'); // Fetch associated habit
+  
+    console.log('Streak before update:', this);
+  
+    if (!this.isActive() && this.streakCount > this.longestStreak) {
+      console.log('Updating longest streak');
+      this.longestStreak = this.streakCount;
+      this.restartStreak(habit.streakType); // Pass habit's streakType
+    }
+  
+    console.log('Streak after update:', this);
+  }
+  
+
+  restartStreak(streakType) {
+    this.streakCount = 0;
+    this.startDate = new Date().toISOString();
+    this.streakType = streakType; // Set streakType from habit
+  }
+
   isActive() {
     const today = new Date();
     const startDate = new Date(this.startDate);
-
+    let endDate;
+  
     if (this.streakType === 'week') {
-      const endDate = dateFns.addDays(startDate, 7);
-      return dateFns.isWithinInterval(today, { start: startDate, end: endDate });
+      endDate = dateFns.addDays(startDate, 7);
+    } else if (this.streakType === 'month') {
+      endDate = dateFns.addMonths(startDate, 1);
+    } else {
+      return false; // Return false for invalid streakType
     }
-
-    if (this.streakType === 'month') {
-      const endDate = dateFns.addMonths(startDate, 1);
-      return dateFns.isWithinInterval(today, { start: startDate, end: endDate });
-    }
-
-    if (this.streakType === 'day') {
-      return dateFns.isSameDay(today, startDate);
-    }
-
-    return false;
+  
+    return dateFns.isWithinInterval(today, { start: startDate, end: endDate });
   }
-
-  async $beforeUpdate(opt, queryContext) {
-    await super.$beforeUpdate(opt, queryContext);
-    if (!this.isActive() && this.streakCount > this.longestStreak) {
-      this.longestStreak = this.streakCount;
-    }
-  }
+  
 }
 
 module.exports = Streak;

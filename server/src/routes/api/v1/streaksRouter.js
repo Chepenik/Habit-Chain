@@ -36,12 +36,13 @@ streaksRouter.get("/:id/status", async (req, res) => {
   }
 });
 
+// have all streak increases go through here
 streaksRouter.post("/", async (req, res) => {
   try {
     const { habitId } = req.body;
     const userId = parseInt(req.user.id, 10);
     const previousStreak = await Streak.query()
-      .findOne({ userId: userId, habitId: habitId, active: true });
+      .findOne({ userId: userId, habitId: habitId });
 
     let updatedStreak;
     if (previousStreak) {

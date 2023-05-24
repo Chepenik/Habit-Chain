@@ -9,7 +9,7 @@ class HabitSeeder {
         why: "To improve cardiovascular health",
         giphy: "https://media1.giphy.com/media/2IudUHdI075HL02Pkk/giphy.gif?cid=c07ef17596p55bac8uvmf6zit83ojyc60lgv4vuxjz6m5meb&ep=v1_gifs_search&rid=giphy.gif&ct=g",
         userId: 1,
-        streakType: "monthly",
+        streakType: "daily",
       },
       {
         name: "Reading 10 pages",
