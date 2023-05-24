@@ -5,8 +5,8 @@ const HabitShow = (props) => {
   const { habitId } = props;
   const [habit, setHabit] = useState(null);
   const [habitChain, setHabitChain] = useState(0);
-  const [streakActive, setStreakActive] = useState(null); 
-  const [longestStreak, setLongestStreak] = useState(null);
+  const [streakActive, setStreakActive] = useState(false); 
+  const [longestStreak, setLongestStreak] = useState(0);
 
   const fetchHabit = async () => {
     try {
@@ -58,7 +58,7 @@ const HabitShow = (props) => {
         const data = await response.json();
         setHabitChain(data.streakCount);
         console.log("Streak count updated successfully");
-        console.log("New streak:", data.streak);
+        console.log("New streak:", data);
       } else {
         console.error("Failed to update streak count:", response.statusText);
       }
