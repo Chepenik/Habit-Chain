@@ -6,6 +6,7 @@ const HabitShow = (props) => {
   const [habit, setHabit] = useState(null);
   const [habitChain, setHabitChain] = useState(0);
   const [streakActive, setStreakActive] = useState(null); 
+  const [longestStreak, setLongestStreak] = useState(null);
 
   const fetchHabit = async () => {
     try {
@@ -15,6 +16,7 @@ const HabitShow = (props) => {
         setHabit(data.habit);
         if (data.existingStreak) {
           setHabitChain(data.existingStreak.streakCount);
+          setLongestStreak(data.existingStreak.longestStreak);
         }
       } else {
         console.error("Failed to fetch habit:", response.statusText);
@@ -26,7 +28,7 @@ const HabitShow = (props) => {
 
   const fetchStreakStatus = async () => {
     try {
-      const response = await fetch(`/api/v1/streaks/${habitId}/status`); // Fetch streak status
+      const response = await fetch(`/api/v1/streaks/${habitId}/status`); 
       if (response.ok) {
         const data = await response.json();
         setStreakActive(data.active);
@@ -41,7 +43,7 @@ const HabitShow = (props) => {
   useEffect(() => {
     fetchHabit();
     fetchStreakStatus(); // Fetch streak status on component mount
-  }, []);
+  }, [habitChain, longestStreak]);
 
   const handleButtonClick = async () => {
     try {
@@ -83,6 +85,9 @@ const HabitShow = (props) => {
         </p>
         <p>
           <b>Streak Type:</b> {habit.streakType}
+        </p>
+        <p>
+          <b>Longest Streak:</b> {longestStreak}
         </p>
         <p>
           <b>Status:</b>{" "}

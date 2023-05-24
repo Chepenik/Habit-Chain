@@ -47,26 +47,10 @@ class Streak extends Model {
     };
   }
 
-  async $beforeUpdate(opt, queryContext) {
-    await super.$beforeUpdate(opt, queryContext);
-    const habit = await this.$relatedQuery('habit'); // Fetch associated habit
-  
-    console.log('Streak before update:', this);
-  
-    if (!this.isActive() && this.streakCount > this.longestStreak) {
-      console.log('Updating longest streak');
-      this.longestStreak = this.streakCount;
-      this.restartStreak(habit.streakType); // Pass habit's streakType
-    }
-  
-    console.log('Streak after update:', this);
-  }
-  
-
   restartStreak(streakType) {
     this.streakCount = 0;
     this.startDate = new Date().toISOString();
-    this.streakType = streakType; // Set streakType from habit
+    this.streakType = streakType; 
   }
 
   isActive() {
