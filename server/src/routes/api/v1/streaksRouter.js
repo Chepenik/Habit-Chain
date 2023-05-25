@@ -43,13 +43,13 @@ streaksRouter.post("/", async (req, res) => {
     const previousStreak = await Streak.query().findOne({ userId, habitId });
 
     let updatedStreak;
-
+console.log("previousStreak", previousStreak)
       updatedStreak = await Streak.query()
         .patchAndFetchById(previousStreak.id, { active: true, streakCount: parseInt(previousStreak.streakCount) + 1 });
-
-      if (updatedStreak.streakCount > updatedStreak.longestStreak) {
+    
+      if (parseInt(updatedStreak.streakCount) > parseInt(updatedStreak.longestStreak)) {
         updatedStreak = await Streak.query()
-          .patchAndFetchById(previousStreak.id, { longestStreak:  parseInt(updatedStreak.streakCount) });
+          .patchAndFetchById(previousStreak.id, { longestStreak: parseInt(updatedStreak.streakCount, 10) });
       }
 
     console.log("New streak created:", updatedStreak);

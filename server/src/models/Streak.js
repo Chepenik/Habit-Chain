@@ -49,6 +49,7 @@ class Streak extends Model {
 
   restartStreak(streakType) {
     this.streakCount = 0;
+    this.active = false;
     this.startDate = new Date().toISOString();
     this.streakType = streakType; 
   }
