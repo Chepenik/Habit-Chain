@@ -1,29 +1,36 @@
 import { Streak } from '../../models/index.js';
 
+
 class StreakSeeder {
   static async seed() {
     const streaksData = [
       {
-        active: true,
-        streakCount: 5,
+        active: false,
+        streakCount: 0,
         habitId: 1,
-        userId: 1, // Hardcoded userId value
+        userId: 1, 
+        startDate: new Date().toISOString(),
+        longestStreak: 0,
         createdAt: new Date().toISOString(),
         updatedAt: new Date().toISOString(),
       },
       {
         active: false,
-        streakCount: 2,
+        streakCount: 0,
         habitId: 2,
-        userId: 1, // Hardcoded userId value
+        userId: 1, 
+        startDate: new Date().toISOString(),
+        longestStreak: 0,
         createdAt: new Date().toISOString(),
         updatedAt: new Date().toISOString(),
       },
       {
-        active: true,
-        streakCount: 10,
+        active: false,
+        streakCount: 0,
         habitId: 3,
-        userId: 1, // Hardcoded userId value
+        userId: 1, 
+        startDate: new Date().toISOString(),
+        longestStreak: 0,
         createdAt: new Date().toISOString(),
         updatedAt: new Date().toISOString(),
       },

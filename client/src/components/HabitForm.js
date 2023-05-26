@@ -83,7 +83,7 @@ const HabitForm = () => {
   }, []); // Only run once on component mount
 
   if (redirect) {
-    return <Redirect to="/" />;
+    return <Redirect to="/habits" />;
   }
 
     return (

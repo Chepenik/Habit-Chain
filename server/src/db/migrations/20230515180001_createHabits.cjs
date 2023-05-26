@@ -11,6 +11,7 @@ exports.up = async (knex) => {
         table.string("name").notNullable();
         table.string("reduceFriction").notNullable();
         table.string("why").notNullable();
+        table.string("giphy").notNullable();
         table.bigInteger("userId").references("users.id").notNullable().index().unsigned()
         table.timestamp("createdAt").notNullable().defaultTo(knex.fn.now());
         table.timestamp("updatedAt").notNullable().defaultTo(knex.fn.now());;

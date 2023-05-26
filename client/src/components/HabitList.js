@@ -24,22 +24,33 @@ const HabitList = () => {
       const response = await fetch(`/api/v1/streaks/${habitId}`);
       if (response.ok) {
         const data = await response.json();
-        return data.streak.streakCount;
+        return {
+          streakCount: data.streakCount,
+          active: data.active
+        };
       } else {
         console.error("Failed to fetch streak:", response.statusText);
-        return 0; 
+        return {
+          streakCount: 0,
+          active: false
+        };
       }
     } catch (error) {
       console.error("Error fetching streak:", error);
-      return 0; 
+      return {
+        streakCount: 0,
+        active: false
+      };
     }
   };
+  
 
   const fetchStreakCounts = async () => {
     const counts = {};
     for (const habit of habits) {
-      const streakCount = await fetchStreakCount(habit.id);
-      counts[habit.id] = streakCount;
+      const streakData = await fetchStreakCount(habit.id);
+      counts[habit.id] = streakData;
+      habit.active = streakData.active;
     }
     setStreakCounts(counts);
   };
@@ -59,7 +70,8 @@ const HabitList = () => {
       key={habit.id}
       habit={habit}
       streakType={habit.streakType}
-      streakCount={streakCounts[habit.id] || 0}
+      streakCount={streakCounts[habit.id] ? streakCounts[habit.id].streakCount : 0}
+      active={habit.active}
     />
   ));
 

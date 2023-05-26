@@ -2,7 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 
 const HabitTile = (props) => {
-  const { habit, streakCount, streakType } = props;
+  const { habit, streakCount, streakType, active } = props;
 
   return (
     <div className="habit-tile">
@@ -12,6 +12,7 @@ const HabitTile = (props) => {
             <p className="habit-name">{habit.name}</p>
             <p>Streak: {streakCount}</p>
             <p>Streak Type: {streakType}</p>
+            <p>Status: {active ? 'active' : 'inactive'}</p>
           </div>
           <div className="cell small-12 medium-4">
             <img src={habit.giphy} alt="GIF" />

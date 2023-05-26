@@ -1,6 +1,6 @@
 const Model = require('./Model');
 const Habit = require('./Habit');
-const User = require('./User'); 
+const User = require('./User');
 
 class Streak extends Model {
   static get tableName() {
@@ -10,13 +10,15 @@ class Streak extends Model {
   static get jsonSchema() {
     return {
       type: 'object',
-      required: ['active', 'streakCount', 'habitId', 'userId'], 
+      required: ['active', 'streakCount', 'habitId', 'userId', 'startDate', 'longestStreak'],
       properties: {
         id: { type: 'integer' },
         active: { type: 'boolean' },
         streakCount: { type: 'integer' },
         habitId: { type: 'integer' },
-        userId: { type: 'integer' }, 
+        userId: { type: 'integer' },
+        startDate: { type: 'string' },
+        longestStreak: { type: 'integer' },
         createdAt: { type: 'string' },
         updatedAt: { type: 'string' },
       },
@@ -33,7 +35,7 @@ class Streak extends Model {
           to: 'habits.id',
         },
       },
-      user: { // Add user relation
+      user: {
         relation: Model.BelongsToOneRelation,
         modelClass: User,
         join: {

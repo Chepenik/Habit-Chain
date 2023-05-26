@@ -28,4 +28,4 @@ const HabitChain = (props) => {
   );
 };
 
-export default HabitChain;
+export default HabitChain; 
