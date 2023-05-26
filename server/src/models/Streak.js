@@ -1,7 +1,6 @@
 const Model = require('./Model');
 const Habit = require('./Habit');
 const User = require('./User');
-const dateFns = require('date-fns');
 
 class Streak extends Model {
   static get tableName() {
@@ -45,41 +44,6 @@ class Streak extends Model {
         },
       },
     };
-  }
-
-  // restartStreak() {
-  //   this.streakCount = 0;
-  //   this.active = false;
-  //   this.startDate = new Date().toISOString();
-  // }
-
-  isConsistent() {
-    const today = new Date();
-    const startDate = new Date(this.startDate);
-    let endDate;
-    const habit = this.$relatedQuery('habit');
-
-    // need to pull in streakType from my habit table
-    if (habit.streakType === 'daily') {
-      endDate = dateFns.addDays(startDate, 1);
-    } else if (habit.streakType === 'weekly') {
-      endDate = dateFns.addWeeks(startDate, 1);
-    } else if (habit.streakType === 'monthly') {
-      endDate = dateFns.addMonths(startDate, 1);
-    } else {
-      return false; // Return false for invalid streakType
-    }
-
-    const isWithinInterval = dateFns.isWithinInterval(today, { start: startDate, end: endDate });
-
-    if (!isWithinInterval) {
-      // User missed a day, week, or month, reset streakCount and active
-      this.streakCount = 0;
-      this.active = false;
-      return false;
-    }
-
-    return true;
   }
 }
 

@@ -8,8 +8,6 @@ const HabitShow = (props) => {
   const [streakActive, setStreakActive] = useState(false); 
   const [longestStreak, setLongestStreak] = useState(0);
 
-  //combine habitchain and streakactive but keep longestreak
-
   const fetchHabit = async () => {
     try {
       const response = await fetch(`/api/v1/habits/${habitId}`);
@@ -44,7 +42,7 @@ const HabitShow = (props) => {
 
   useEffect(() => {
     fetchHabit();
-    fetchStreakStatus(); // Fetch streak status on component mount
+    fetchStreakStatus(); 
   }, [habitChain, longestStreak]);
 
   const handleButtonClick = async () => {
@@ -60,7 +58,6 @@ const HabitShow = (props) => {
         const data = await response.json();
         setHabitChain(data.streakCount);
         setStreakActive(true);
-        //use setStreak here to data.streak once you combine the states
         console.log("Streak count updated successfully");
         console.log("New streak:", data);
       } else {
@@ -70,7 +67,7 @@ const HabitShow = (props) => {
       console.error("Error updating streak count:", error);
     }
   };
-
+  
   if (!habit) {
     return <p>Loading habit...</p>;
   }
@@ -86,9 +83,6 @@ const HabitShow = (props) => {
         </p>
         <p>
           <b>Why I want to make this a habit:</b> {habit.why}
-        </p>
-        <p>
-          <b>Streak Type:</b> {habit.streakType}
         </p>
         <p>
           <b>Longest Streak:</b> {longestStreak}
