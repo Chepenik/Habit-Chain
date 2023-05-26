@@ -9,7 +9,6 @@ const HabitForm = () => {
     reduceFriction: "",
     why: "",
     giphy: "",
-    streakType: "",
   });
 
   const [redirect, setRedirect] = useState(false);
@@ -41,9 +40,6 @@ const HabitForm = () => {
     const errors = {};
     if (!habitData.name) {
       errors.name = "Please enter the habit name";
-    }
-    if(!habitData.streakType) {
-      errors.streakType = "Please select streak type";
     }
     if (!habitData.reduceFriction) {
       errors.reduceFriction = "Please enter the steps to reduce friction";
@@ -120,23 +116,6 @@ const HabitForm = () => {
             />
             {formErrors.name && <p className="error">{formErrors.name}</p>}
         </div>
-        <div className="form-group">
-          <label htmlFor="streakType">Streak Type:</label>
-            <select
-              id="streakType"
-              name="streakType"
-              value={habitData.streakType}
-              onChange={handleChange}
-            >
-              <option value="">Select Streak Type</option>
-              <option value="daily">Daily</option>
-              <option value="weekly">Weekly</option>
-              <option value="monthly">Monthly</option>
-            </select>
-            {formErrors.streakType && (
-              <p className="error">{formErrors.streakType}</p>
-            )}
-      </div>
         <div className="form-group">
             <label htmlFor="reduceFriction">
             What steps will you take to minimize any friction or difficulties associated with completing the habit, ensuring its daily completion?
