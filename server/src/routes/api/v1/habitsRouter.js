@@ -1,5 +1,4 @@
 import express from "express";
-import { Redirect } from "react-router-dom";
 import { Habit, Streak } from "../../../models/index.js";
 import giphyRouter from "./giphyRouter.js";
 
@@ -7,7 +6,8 @@ const habitsRouter = new express.Router();
 
 habitsRouter.get("/", async (req, res) => {
   try {
-    const habits = await Habit.query();
+    const userId = req.user.id;
+    const habits = await Habit.query().where({ userId });
     return res.status(200).json({ habits });
   } catch (error) {
     return res.status(500).json({ errors: error });

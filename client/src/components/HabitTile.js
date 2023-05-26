@@ -2,7 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 
 const HabitTile = (props) => {
-  const { habit, streakCount, streakType, active } = props;
+  const { habit, streakCount, active } = props;
 
   return (
     <div className="habit-tile">

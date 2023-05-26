@@ -39,7 +39,7 @@ const Welcome = () => {
           alt="Habit Tracker"
         />
       </div>
-      <div>
+      <div className="welcomeButton">
         <button>
           <a href="/habits">Ready To Start Building Postive Habits? Click Here To Start Tracking!</a>
         </button>
