@@ -37,7 +37,7 @@ const App = (props) => {
           <Welcome />
         </Route>
         <Route exact path="/habits">
-          <HabitList /> 
+          <HabitList />
         </Route>
         <Route exact path="/users/new" component={RegistrationForm} />
         <Route exact path="/user-sessions/new" component={SignInForm} />

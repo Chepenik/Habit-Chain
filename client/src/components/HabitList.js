@@ -78,7 +78,7 @@ const HabitList = () => {
   return (
     <div className="HabitIndex">
       <h1>Keep Stacking Those Habits</h1>
-      <h5>Like flappy bird you will never win Habit-Chain but you will have fun trying to hit new PRs</h5>
+        <h5>Like flappy bird you will never win Habit-Chain but you will have fun trying to hit new PRs</h5>
       <div className="habit-list">{habitItems}</div>
     </div>
   );
