@@ -329,7 +329,7 @@ label {
   align-items: center;
   position: fixed;
   bottom: 20px;
-  left: calc(50% - 250px); /* Adjust the value based on your desired spacing */
+  left: calc(50% - 150px); /* Adjust the value based on your desired spacing */
   transform: translateX(-50%);
   border-radius: 5%;
 }
@@ -363,7 +363,7 @@ label {
   align-items: center;
   position: fixed;
   bottom: 20px;
-  left: calc(50% + 250px); /* Adjust the value based on your desired spacing */
+  left: calc(50% + 150px); /* Adjust the value based on your desired spacing */
   transform: translateX(-50%);
   border-radius: 5%;
 }
