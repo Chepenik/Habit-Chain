@@ -66,7 +66,7 @@ streaksRouter.post("/delete", async (req, res) => {
     const userId = parseInt(req.user.id, 10);
     const previousStreak = await Streak.query().findOne({ userId, habitId });
 
-    if (previousStreak) {
+    if (previousStreak.active === true) {
       const updatedStreak = await Streak.query().patchAndFetchById(previousStreak.id, {
         active: false,
         streakCount: 0
