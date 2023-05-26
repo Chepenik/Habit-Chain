@@ -43,7 +43,6 @@ const HabitList = () => {
       };
     }
   };
-  
 
   const fetchStreakCounts = async () => {
     const counts = {};
@@ -77,8 +76,12 @@ const HabitList = () => {
   return (
     <div className="HabitIndex">
       <h1>Keep Stacking Those Habits</h1>
-        <h5>Like flappy bird you will never win Habit-Chain but you will have fun trying to hit new PRs</h5>
-      <div className="habit-list">{habitItems}</div>
+      <h5>Like flappy bird you will never win Habit-Chain but you will have fun trying to hit new PRs</h5>
+      {habits.length > 0 ? (
+        <div className="habit-list">{habitItems}</div>
+      ) : (
+        <div className="empty-habits">Start adding some habits!</div>
+      )}
     </div>
   );
 };
