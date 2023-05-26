@@ -242,9 +242,11 @@
 }
 
 .habit-show img {
+  margin: 10px;
   height: 100%;
   width: 250px;
   object-fit: cover;
+  border-radius: 10px;
 }
 
 .error {
