@@ -313,6 +313,19 @@ label {
   height: 25px;
 }
 
+.HabitChainImagesContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 20px;
+}
+
+.HabitChainImagesContainer img {
+  max-width: 50%;
+  height: auto;
+  margin-bottom: 10px;
+}
+
 .habit-chain .chain-icon {
   width: 20px;
   height: auto;
@@ -329,7 +342,7 @@ label {
   align-items: center;
   position: fixed;
   bottom: 20px;
-  left: calc(50% - 250px); /* Adjust the value based on your desired spacing */
+  left: calc(50% - 150px); /* Adjust the value based on your desired spacing */
   transform: translateX(-50%);
   border-radius: 5%;
 }
@@ -363,7 +376,7 @@ label {
   align-items: center;
   position: fixed;
   bottom: 20px;
-  left: calc(50% + 250px); /* Adjust the value based on your desired spacing */
+  left: calc(50% + 150px); /* Adjust the value based on your desired spacing */
   transform: translateX(-50%);
   border-radius: 5%;
 }

@@ -11,7 +11,6 @@ const HabitTile = (props) => {
           <div className="cell small-12 medium-8">
             <p className="habit-name">{habit.name}</p>
             <p>Streak: {streakCount}</p>
-            <p>Streak Type: {streakType}</p>
             <p>Status: {active ? 'active' : 'inactive'}</p>
           </div>
           <div className="cell small-12 medium-4">
