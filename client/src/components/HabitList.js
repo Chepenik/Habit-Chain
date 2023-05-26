@@ -69,7 +69,6 @@ const HabitList = () => {
     <HabitTile
       key={habit.id}
       habit={habit}
-      streakType={habit.streakType}
       streakCount={streakCounts[habit.id] ? streakCounts[habit.id].streakCount : 0}
       active={habit.active}
     />
