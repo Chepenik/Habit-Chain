@@ -60,4 +60,30 @@ console.log("previousStreak", previousStreak)
   }
 });
 
+streaksRouter.post("/delete", async (req, res) => {
+  try {
+    const { habitId } = req.body;
+    const userId = parseInt(req.user.id, 10);
+    const previousStreak = await Streak.query().findOne({ userId, habitId });
+
+    if (previousStreak) {
+      const updatedStreak = await Streak.query().patchAndFetchById(previousStreak.id, {
+        active: false,
+        streakCount: 0
+      });
+
+      console.log("Streak reset successfully");
+      console.log("New streak:", updatedStreak);
+
+      return res.status(201).json({ streakCount: updatedStreak.streakCount });
+    } else {
+      console.error("No previous streak found for the given user and habit");
+      return res.status(404).json({ error: "No previous streak found" });
+    }
+  } catch (error) {
+    console.error("Error resetting streak:", error);
+    return res.status(500).json({ error: "Failed to reset streak" });
+  }
+});
+
 export default streaksRouter;

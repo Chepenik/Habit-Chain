@@ -67,6 +67,29 @@ const HabitShow = (props) => {
       console.error("Error updating streak count:", error);
     }
   };
+
+  const handleResetClick = async () => {
+    try {
+      const response = await fetch("/api/v1/streaks/delete", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ habitId: parseInt(habitId, 10) }),
+      });
+      if (response.ok) {
+        const data = await response.json();
+        setHabitChain(data.streakCount);
+        setStreakActive(true);
+        console.log("Streak count updated successfully");
+        console.log("New streak:", data);
+      } else {
+        console.error("Failed to update streak count:", response.statusText);
+      }
+    } catch (error) {
+      console.error("Error updating streak count:", error);
+    }
+  };
   
   if (!habit) {
     return <p>Loading habit...</p>;
@@ -100,6 +123,11 @@ const HabitShow = (props) => {
       <div className="streakButton">
         <button className="glow-on-hover signup-link" onClick={handleButtonClick}>
           Click To Add To Your Streak
+        </button>
+      </div>
+      <div className="resetButton">
+        <button className="glow-on-hover signup-link" onClick={handleResetClick}>
+          Click To Restart Your Streak
         </button>
       </div>
       <HabitChain chain={habitChain} giphyImage={habit.giphy} />
