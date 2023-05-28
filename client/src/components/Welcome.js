@@ -1,9 +1,10 @@
 import React from "react";
+import { BsLink } from "react-icons/bs";
 
 const Welcome = () => {
   return (
     <div className="HabitIndex">
-      <h1>Visualize Your Habits with Habit-Chain</h1>
+      <h1>Visualize Your Habits with Habit<BsLink />Chain</h1>
       <img
         className="HabitChainImage"
         src="https://nostr.build/p/nb8240.jpg"
@@ -30,18 +31,21 @@ const Welcome = () => {
           className="HabitChainImageOne"
           src="https://nostr.build/p/nb9534.jpg"
           alt="Habit Tracker"
+          style={{ width: "500px", height: "auto", border: "2px solid black" }}
         />
         <h3>See all your habits on the index page</h3>
         <img
           className="HabitChainImageTwo"
           src="https://nostr.build/p/nb9536.jpg"
           alt="Habit Tracker"
+          style={{ width: "500px", height: "auto", border: "2px solid black" }}
         />
         <h3>Add streaks to your Habit-Chain or reset the chain if you miss a day</h3>
         <img
           className="HabitChainImageThree"
           src="https://nostr.build/p/nb9535.jpg"
           alt="Habit Tracker"
+          style={{ width: "500px", height: "auto", border: "2px solid black" }}
         />
       </div>
       <div className="welcomeButton">
