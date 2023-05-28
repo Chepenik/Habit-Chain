@@ -3,21 +3,26 @@ import React from "react";
 const Welcome = () => {
   return (
     <div className="HabitIndex">
-      <h1>Habit-chain helps people visualize their habits.</h1>
+      <h1>Visualize Your Habits with Habit-Chain</h1>
       <img
         className="HabitChainImage"
         src="https://nostr.build/p/nb8240.jpg"
         alt="Habit Tracker"
       />
       <h6>
-        A simple web application using gifs, psuedo blockchains, and user input to help people keep stacking positive habits. 
+      Habit-Chain is a web application designed to help you track and maintain positive habits. 
+      <br />
+      By utilizing gifs, pseudo blockchains, and user input, it enables you to create a habit-stacking routine that leads to long-lasting changes. 
         <br />
-        It is so easy to lose sight of progress made! However, sticking with
-        positive habits over time can lead to profound changes.
         <br />
-        Tony Robbins said it best,
-        "People tend to overestimate what they can accomplish in a day and
-        underestimate what they can accomplish in a year."
+        <br />
+        It's easy to lose track of the progress you've made, but with HabitChain's visual interface, you can stay motivated and see your accomplishments at a glance.
+        <br /> 
+        Building positive habits over time can have a profound impact on your life.
+        <br />
+        <br />
+        <br />
+        As Tony Robbins once said, "People often overestimate what they can achieve in a day and underestimate what they can accomplish in a year."
       </h6>
       <div className="HabitChainImagesContainer">
         <h3>Use the "Add A Habit" button in the top right to fill out a habit form</h3>
