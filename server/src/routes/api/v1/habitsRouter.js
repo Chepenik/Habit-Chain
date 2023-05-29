@@ -29,9 +29,9 @@ habitsRouter.get("/:id", async (req, res) => {
 
 habitsRouter.post("/", async (req, res) => {
   try {
-    const { name, reduceFriction, why, giphy, streakType } = req.body;
+    const { name, reduceFriction, why, giphy } = req.body;
     const userId = parseInt(req.user.id, 10); 
-    const habit = await Habit.query().insertAndFetch({ name, reduceFriction, why, giphy, streakType, userId });
+    const habit = await Habit.query().insertAndFetch({ name, reduceFriction, why, giphy, userId });
 console.log(habit)
     const streak = await Streak.query().insertAndFetch({
       active: false,
@@ -50,6 +50,32 @@ console.log(habit)
     return res.status(500).json({ errors: error });
   }
 });
+
+habitsRouter.delete("/:id", async (req, res) => {
+  const { id } = req.params;
+  const userId = req.user.id;
+  try {
+    const habit = await Habit.query().findById(id);
+
+    if (!habit) {
+      return res.status(404).json({ message: "Habit not found" });
+    }
+
+    if (habit.userId !== userId) {
+      return res
+        .status(403)
+        .json({ message: "You are not authorized to delete this habit" });
+    }
+
+    await Streak.query().delete().where({ habitId: id });
+    await Habit.query().deleteById(id);
+
+    return res.status(200).json({ message: "Habit was deleted" });
+  } catch (error) {
+    return res.status(500).json({ errors: error });
+  }
+});
+
 
 habitsRouter.use("/:habitId/giphy", giphyRouter);
 
