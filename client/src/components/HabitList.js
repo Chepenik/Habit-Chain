@@ -64,12 +64,30 @@ const HabitList = () => {
     }
   }, [habits]);
 
+  const handleDelete = async (habitId) => {
+    try {
+      const response = await fetch(`/api/v1/habits/${habitId}`, {
+        method: 'DELETE',
+        // Additional headers or authentication tokens can be included if necessary
+      });
+      if (response.ok) {
+        // Update the habits list after successful deletion
+        fetchHabits();
+      } else {
+        console.error('Failed to delete habit:', response.statusText);
+      }
+    } catch (error) {
+      console.error('Error deleting habit:', error);
+    }
+  };  
+
   const habitItems = habits.map((habit) => (
     <HabitTile
       key={habit.id}
       habit={habit}
       streakCount={streakCounts[habit.id] ? streakCounts[habit.id].streakCount : 0}
       active={habit.active}
+      handleDelete={handleDelete}
     />
   ));
 
