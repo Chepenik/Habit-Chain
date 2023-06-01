@@ -3,8 +3,11 @@ import ErrorList from "../layout/ErrorList";
 import FormError from "../layout/FormError";
 import config from "../../config";
 import translateServerErrors from "../../services/translateServerErrors";
+import { useHistory } from "react-router-dom";
 
 const RegistrationForm = () => {
+  const history = useHistory();
+
   const [userPayload, setUserPayload] = useState({
     username: "",
     email: "",
@@ -102,13 +105,23 @@ const RegistrationForm = () => {
     });
   };
 
+  const signUpWithGoogle = () => {
+    console.log("I have been clicked")
+    history.push("/api/v1/auth/google");
+    console.log("I have been gone through")
+  };
+
   if (shouldRedirect) {
     location.href = "/";
   }
 
   return (
     <div className="grid-container">
-      <h1>Register</h1>
+      <div className="googleSignIn" >
+        <button onClick={signUpWithGoogle}>Sign up with Google</button>
+      </div>
+      <hr />
+        <h1>Or Register With An Email</h1>
       <ErrorList errors={serverErrors} />
       <form onSubmit={onSubmit}>
         <div>
