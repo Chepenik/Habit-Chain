@@ -3,8 +3,12 @@ import ErrorList from "../layout/ErrorList";
 import FormError from "../layout/FormError";
 import config from "../../config";
 import translateServerErrors from "../../services/translateServerErrors";
+import { useHistory, Redirect } from "react-router-dom";
+import { GoogleLogin } from "react-google-login";
 
 const RegistrationForm = () => {
+  const history = useHistory();
+
   const [userPayload, setUserPayload] = useState({
     username: "",
     email: "",
@@ -14,7 +18,6 @@ const RegistrationForm = () => {
 
   const [errors, setErrors] = useState({});
   const [serverErrors, setServerErrors] = useState({});
-
   const [shouldRedirect, setShouldRedirect] = useState(false);
 
   const validateInput = () => {
@@ -102,13 +105,28 @@ const RegistrationForm = () => {
     });
   };
 
+  const responseGoogle = (response) => {
+    // Handle the response from Google
+    console.log(response);
+  };
+
   if (shouldRedirect) {
-    location.href = "/";
+    return <Redirect to="/" />;
   }
 
   return (
     <div className="grid-container">
-      <h1>Register</h1>
+      <div className="googleSignIn">
+        <GoogleLogin
+          clientId="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" // Replace with your actual Google client ID
+          buttonText="Sign up with Google"
+          onSuccess={responseGoogle}
+          onFailure={responseGoogle} // You can handle failure if needed
+          cookiePolicy={"single_host_origin"}
+        />
+      </div>
+      <hr />
+      <h1>Or Register With An Email</h1>
       <ErrorList errors={serverErrors} />
       <form onSubmit={onSubmit}>
         <div>
