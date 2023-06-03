@@ -19,6 +19,7 @@
   font-family: 'Crimson Pro', serif;
   color: #000000;
   font-size: 2em;
+  line-height: 1.5;
 }
 
 .habit-tile {
@@ -305,6 +306,10 @@ label {
   flex-wrap: wrap;
 }
 
+.habit-chain-item {
+  border-radius: 10%;
+}
+
 .habit-chain img {
   flex: 0 0 calc(12.5% - 10px);
   height: 100%;
@@ -414,4 +419,90 @@ label {
 
 h6 {
   margin: 20px;
+  text-align: center;
+}
+
+.welcome-container {
+  margin: auto;
+  max-width: 800px;
+  padding: 20px;
+}
+
+.welcome-header {
+  font-size: 28px;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.habit-tracker-image {
+  display: block;
+  margin: 0 auto;
+  max-width: 100%;
+  height: auto;
+  margin-bottom: 20px;
+  width: 500px;
+  height: 100%;
+  margin-bottom: 10px;
+  border-radius: 10%;
+  border: 5px solid #2F58CD; 
+}
+
+.welcome-description {
+  font-size: 16px;
+  line-height: 1.5;
+  margin-bottom: 20px;
+}
+
+.habit-chain-images-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+.habit-chain-image-title {
+  font-size: 18px;
+  margin-bottom: 10px;
+}
+
+.habit-chain-welcome-item {
+  width: 55%;
+  margin-bottom: 20px;
+  animation: slide 4s infinite alternate;
+}
+
+.habit-chain-demo {
+  display: flex;
+  margin: 0 auto;
+  max-width: 100%;
+  height: auto;
+  border: 2px solid black;
+}
+
+.welcome-button {
+  text-align: center;
+}
+
+.start-building-button {
+  background-color: #2F58CD;
+  color: #ffffff;
+  border: none;
+  padding: 10px 20px;
+  font-size: 16px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.start-building-button a {
+  color: #ffffff;
+  text-decoration: none;
+}
+
+.start-building-button a:hover {
+  color: #000000;
+  text-decoration: none;
+}
+
+.start-building-button:hover {
+  background-color: #B4E4FF;
 }
