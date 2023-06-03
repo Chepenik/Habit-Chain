@@ -306,6 +306,10 @@ label {
   flex-wrap: wrap;
 }
 
+.habit-chain-item {
+  border-radius: 10%;
+}
+
 .habit-chain img {
   flex: 0 0 calc(12.5% - 10px);
   height: 100%;
@@ -461,7 +465,7 @@ h6 {
   margin-bottom: 10px;
 }
 
-.habit-chain-item {
+.habit-chain-welcome-item {
   width: 55%;
   margin-bottom: 20px;
   animation: slide 4s infinite alternate;

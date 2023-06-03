@@ -20,7 +20,7 @@ const Welcome = () => {
         As Tony Robbins once said, "People often overestimate what they can achieve in a day and underestimate what they can accomplish in a year."
       </p>
       <div className="habit-chain-images-container">
-        <div className="habit-chain-item">
+        <div className="habit-chain-welcome-item">
           <h3 className="habit-chain-image-title">Use the "Add A Habit" button in the top right to fill out a habit form</h3>
           <img
             className="habit-chain-demo"
@@ -28,7 +28,7 @@ const Welcome = () => {
             alt="Habit Tracker"
           />
         </div>
-        <div className="habit-chain-item">
+        <div className="habit-chain-welcome-item">
           <hr />
           <h3 className="habit-chain-image-title">See all your habits on the index page</h3>
           <img
@@ -37,7 +37,7 @@ const Welcome = () => {
             alt="Habit Tracker"
           />
         </div>
-        <div className="habit-chain-item">
+        <div className="habit-chain-welcome-item">
           <hr />
           <h3 className="habit-chain-image-title">Add streaks to your Habit-Chain or reset the chain if you miss a day</h3>
           <img
