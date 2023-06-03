@@ -1,7 +1,46 @@
-Habit-Chain
+# Habit-Chain
 
-Welcome to Habit-Chain, the blockchain app that's more about building better habits than building your bank account! But don't worry, we promise it won't turn into another one of those meme coins that'll make you rich overnight (or make you broke overnight, for that matter).
+Habit-Chain is an open-source web app designed to help users keep track of their habits. It allows you to monitor your progress, set goals, and stay motivated.
 
-Instead, Habit-Chain is here to help you become the best version of yourself, one habit at a time. It's like a personal trainer for your mind, but without all the yelling and sweat. And unlike those boring habit-tracking apps that look like they were designed by your grandma, Habit-Chain is all about visualizing your progress and giving you that sweet, sweet data representation you've been craving.
+## Getting Started
 
-So why wait? Adopt a low time preference, stack those positive habits, and watch your life 10x – or at least, that's what we heard from some guy on the internet. But hey, we're not here to make any promises we can't keep. Just give Habit-Chain a try and see for yourself.
+To run Habit-Chain locally, follow these steps:
+
+1. Clone the repository from GitHub.
+2. Install all the required packages by running the following command:
+
+yarn install
+
+or
+
+npm install
+
+3. If you don't want to create a custom name for your database, you can use the provided file `server/src/config/getDatabaseUrl.cjs` to configure your PostgreSQL database.
+4. Start the development server by running the following command:
+
+yarn dev
+
+or 
+
+npm run dev
+
+## Deployment
+
+Habit-Chain is functional and deployed at https://habitchain.herokuapp.com. Feel free to visit the live version of the app.
+
+## Roadmap
+
+Habit-Chain is an ongoing project, and there are several features currently in development. Some of the upcoming features include:
+
+- Integration with Google login for a seamless authentication experience.
+- Implementation of an escrow account, allowing users to store bitcoin in a wallet. If the habit goal isn't met, the bitcoin will be donated to a charity of the user's choice. If the goal is achieved, the bitcoin will be returned.
+- Additional improvements and enhancements based on user feedback.
+- Allowing users the ability to share their habits on social media easily
+
+## Contributing
+
+Contributions are welcome! If you have any ideas, suggestions, or find any issues, feel free to submit a pull request. Together, we can make Habit-Chain even better :)
+
+## Thanks
+
+Thank you for checking out Habit-Chain! Your support and contributions are greatly appreciated. If you have any questions or feedback, please don't hesitate to reach out.
