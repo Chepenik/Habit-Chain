@@ -506,3 +506,68 @@ h6 {
 .start-building-button:hover {
   background-color: #B4E4FF;
 }
+
+// for mobile
+@media (max-width: 768px) {
+  .habit-tile {
+    width: 100%;
+    max-width: none;
+    margin: 20px 10px;
+  }
+
+  .habit-tile:hover p {
+    color: #000000;
+  }
+
+  .top-bar {
+    font-size: 1em;
+  }
+
+  .habit-form {
+    max-width: 100%;
+  }
+
+  .habit-show img {
+    width: 100%;
+    max-width: 100%; /* Add this line to limit the image width */
+    height: auto; /* Add this line to maintain aspect ratio */
+  }
+
+  .habit-chain-item {
+    flex: 0 0 calc(25% - 10px);
+    margin: 5px;
+  }
+
+  .HabitChainImagesContainer img {
+    max-width: 100%;
+    height: auto;
+  }
+
+  .streakButton {
+    left: calc(50% - 100px);
+  }
+
+  .resetButton {
+    left: calc(50% + 100px);
+  }
+
+  .welcome-container {
+    margin: 50px 20px;
+  }
+
+  .habit-tracker-image {
+    width: 100%;
+  }
+
+  .habit-chain-demo {
+    max-width: 100%;
+    height: auto;
+    border: 2px solid black;
+  }
+
+  .habit-chain-welcome-item {
+    width: 100%;
+    margin-bottom: 20px;
+    animation: none;
+  }
+}
