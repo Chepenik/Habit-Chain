@@ -72,7 +72,7 @@ const SignInForm = () => {
   };
 
   if (shouldRedirect) {
-    location.href = "/";
+    location.href = "/habits";
   }
 
   return (
