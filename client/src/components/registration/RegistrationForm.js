@@ -121,12 +121,12 @@ const RegistrationForm = () => {
           clientId="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" // Replace with your actual Google client ID
           buttonText="Sign up with Google"
           onSuccess={responseGoogle}
-          onFailure={responseGoogle} // You can handle failure if needed
+          onFailure={responseGoogle} 
           cookiePolicy={"single_host_origin"}
         />
       </div>
       <hr />
-      <h1>Or Register With An Email</h1>
+      <h1>Or</h1>
       <ErrorList errors={serverErrors} />
       <form onSubmit={onSubmit}>
         <div>
