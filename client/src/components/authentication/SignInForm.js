@@ -73,10 +73,13 @@ const SignInForm = () => {
   };
 
   const responseGoogle = (response) => {
-    // Handle the response from Google
-    console.log(response);
+    if (response.accessToken) {
+      // The user has successfully signed in with Google.
+      // You can now use the `accessToken` to access Google APIs on behalf of the user.
+    } else {
+      // The user has not successfully signed in with Google.
+    }
   };  
-
   if (shouldRedirect) {
     location.href = "/";
   }
@@ -86,7 +89,7 @@ const SignInForm = () => {
       {credentialsErrors ? <p className="callout alert">{credentialsErrors}</p> : null}
       <h1>Sign In</h1>
       <GoogleLogin
-        clientId="YOUR_GOOGLE_CLIENT_ID"
+        clientId="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"
         buttonText="Sign in with Google"
         onSuccess={responseGoogle}
         onFailure={responseGoogle}

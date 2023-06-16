@@ -118,7 +118,7 @@ const RegistrationForm = () => {
     <div className="grid-container">
       <div className="googleSignIn">
         <GoogleLogin
-          clientId="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" // Replace with your actual Google client ID
+          clientId="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" 
           buttonText="Sign up with Google"
           onSuccess={responseGoogle}
           onFailure={responseGoogle} 

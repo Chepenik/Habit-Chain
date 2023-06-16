@@ -29,8 +29,8 @@ const googleAuthHandler = (accessToken, refreshToken, profile, done) => {
 
 const googleStrategy = new GoogleStrategy(
   {
-    clientID: process.env.GOOGLE_CLIENT_ID,
-    clientSecret: process.env.GOOGLE_CLIENT_SECRET,
+    clientID: "191118507891-1tkk97kff3n0jrijkbg8t9ov7hgp3aj0.apps.googleusercontent.com",
+    clientSecret: "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",
     callbackURL: "http://localhost:3000/auth/google/callback"
   },
   googleAuthHandler
